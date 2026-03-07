@@ -1,0 +1,50 @@
+.construction-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 2rem auto 1rem;
+    padding: 0.75rem 1.5rem;
+    max-width: fit-content;
+    border-radius: 12px;
+    font-family: var(--font-body, sans-serif);
+    font-size: 0.85rem;
+    font-weight: 500;
+
+    /* Using Catppuccin Yellow for construction vibe */
+    color: var(--ctp-yellow, #e5c890);
+    background: rgba(229, 200, 144, 0.1);
+    border: 1px solid rgba(229, 200, 144, 0.3);
+
+    /* Subtle blur effect matching site style */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition: all 0.2s ease;
+}
+
+.construction-banner:hover {
+    background: rgba(229, 200, 144, 0.15);
+    border-color: rgba(229, 200, 144, 0.5);
+    transform: translateY(-2px);
+}
+
+.construction-banner__text {
+    margin: 0;
+}
+
+.construction-banner__icon {
+    font-size: 1.1rem;
+}
+
+/* Adjust colors for the dark mode music page so it remains visible */
+body:has(.music-page) .construction-banner {
+    color: var(--am-text, #f5f5f7);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body:has(.music-page) .construction-banner:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,52 @@
+.site-footer {
+    padding: 0.5rem 1.5rem 1rem;
+    text-align: center;
+    font-family: var(--font-body, sans-serif);
+    font-size: 0.85rem;
+    color: var(--ctp-subtext0);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: transparent;
+    width: 100%;
+}
+
+.site-footer__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.site-footer__text {
+    margin: 0;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.site-footer__text:hover {
+    opacity: 1;
+}
+
+.site-footer__link {
+    color: var(--ctp-lavender);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.site-footer__link:hover {
+    color: var(--ctp-pink);
+}
+
+/* If the body is in /music mode (darker bg), adjust colors slightly for visibility */
+body:has(.music-page) .site-footer__text {
+    color: var(--am-text2, #a1a1a6);
+}
+
+body:has(.music-page) .site-footer__link {
+    color: var(--am-red, #D6003B);
+}
+
+body:has(.music-page) .site-footer__link:hover {
+    color: #ff6b6b;
+}

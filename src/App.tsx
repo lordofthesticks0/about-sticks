@@ -1,15 +1,27 @@
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import Home from "./pages/Home";
+import Music from "./pages/Music";
+import Footer from "./components/Footer";
+import ConstructionBanner from "./components/ConstructionBanner";
 
+/**
+ * App — the root layout component.
+ *
+ * It defines the routes for the site:
+ *   /       → Home page (hero header + sections)
+ *   /music  → Music subpage
+ */
 function App() {
   return (
-    <main className="hero-header__root">
-      <img
-        className="hero-header__img"
-        src="https://cdn.discordapp.com/avatars/546229347703586839/2dc08467c2eee98f79a3fa2e22940fc2.png?size=256"
-        alt="Profile Placeholder"
-      />
-      <h1 className="hero-header__title">Chiron GoRound Bold Text</h1>
-    </main>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/music" element={<Music />} />
+      </Routes>
+      <ConstructionBanner />
+      <Footer />
+    </>
   );
 }
 

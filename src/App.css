@@ -1,21 +1,769 @@
+/* ===================================================
+   App.css — Hero Header styles
+   =================================================== */
+
+/* ---------- Keyframe animations ---------- */
+
+/* Soft fade-and-rise for the whole hero section */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slow, continuous "breathing" glow around the avatar */
+@keyframes pulseGlow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(186, 187, 241, 0.45),
+      0 0 40px 0 rgba(140, 170, 238, 0.15);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(186, 187, 241, 0),
+      0 0 60px 10px rgba(140, 170, 238, 0.25);
+  }
+}
+
+/* Subtle floating motion for the avatar */
+/*
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+*/
+/* Gradient text shimmer (moves background position) */
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ---------- Hero Header layout ---------- */
 .hero-header__root {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #0a192f; /* Dark Blue */
-  margin: 0;
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+
+  /* Radial gradient backdrop for depth */
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%,
+      rgba(140, 170, 238, 0.08) 0%,
+      transparent 70%),
+    var(--ctp-base);
+
+  /* Animate the whole section in */
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+/* Very subtle decorative blurred orb behind the avatar area */
+.hero-header__root::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  background: radial-gradient(circle,
+      rgba(186, 187, 241, 0.1) 0%,
+      rgba(140, 170, 238, 0.06) 40%,
+      transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Profile picture ---------- */
+.hero-header__img-wrapper {
+  position: relative;
+  z-index: 1;
+  /* animation: float 5s ease-in-out infinite; */
 }
 
 .hero-header__img {
-  width: 256px;
-  height: 256px;
-  border-radius: 50%; /* 50% Rounded Corners */
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 20px;
+
+  /* Catppuccin Lavender border ring */
+  border: 3px solid var(--ctp-lavender);
+
+  /* Breathing glow */
+  animation: pulseGlow 4s ease-in-out infinite;
+
+  /* Hover: scale up and intensify the glow */
+  transition: transform 0.35s ease, filter 0.35s ease;
 }
+
+.hero-header__img:hover {
+  transform: scale(1.06);
+  filter: brightness(1.1);
+}
+
+/* ---------- Text content ---------- */
+.hero-header__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 1.75rem;
+
+  /* Staggered fade-in (slightly later than the parent) */
+  animation: fadeInUp 0.8s ease-out 0.25s both;
+}
+
 .hero-header__title {
-  font-family: "Chiron GoRound TC", sans-serif;
-  font-size: 30px;
-  font-weight: 700; /* Bold */
-  color: #ffb7c5; /* Soft Pastel Pink */
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.7 5rem);
+  font-weight: 700;
+  line-height: 1.2;
+
+  /* Animated gradient text */
+  background: linear-gradient(135deg,
+      var(--ctp-pink),
+      var(--ctp-mauve),
+      var(--ctp-blue),
+      var(--ctp-lavender));
+  background-size: 200% 200%;
+  animation: shimmer 3s ease infinite;
+
+  /* Clip the gradient to the text */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-header__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 3000;
+  color: var(--ctp-subtext1);
+  margin-top: 0.1rem;
+  letter-spacing: 0.02em;
+}
+
+.hero-header__subsubtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.5rem, 0.5vw, 0.8rem);
+  font-weight: 200;
+  color: var(--ctp-subtext0);
+  margin-top: 0.2rem;
+  letter-spacing: 0.02em;
+}
+
+/* Thin decorative divider line beneath the subtitle */
+.hero-header__divider {
+  width: 64px;
+  height: 2px;
+  margin: 1.5rem auto 0;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+      transparent,
+      var(--ctp-lavender),
+      transparent);
+  opacity: 0.55;
+}
+
+/* ---------- Scroll-down indicator ---------- */
+.hero-header__scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  z-index: 1;
+
+  /* Fade in later */
+  animation: fadeInUp 1.8s ease-out 2.6s both;
+}
+
+.hero-header__scroll-text {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ctp-overlay2);
+}
+
+.hero-header__scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid var(--ctp-overlay1);
+  border-bottom: 2px solid var(--ctp-overlay1);
+  transform: rotate(45deg);
+  animation: float 2s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width: 480px) {
+  .hero-header__img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-header__root::before {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* ===================================================
+   Music Section — homepage genre grid
+   =================================================== */
+
+/* Fade-in for section on scroll (re-uses the existing keyframe) */
+.music-section {
+  padding: 5rem 1.5rem 4rem;
+  max-width: 760px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+/* ── Section header ── */
+.music-section__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.music-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+
+  /* Same gradient-text treatment as the hero title */
+  background: linear-gradient(135deg,
+      var(--ctp-pink),
+      var(--ctp-mauve),
+      var(--ctp-blue));
+  background-size: 200% 200%;
+  animation: shimmer 4s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.music-section__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ctp-subtext0);
+  margin-top: 0.35rem;
+}
+
+.music-section__divider {
+  width: 48px;
+  height: 2px;
+  margin: 1.25rem auto 0;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+      transparent,
+      var(--ctp-lavender),
+      transparent);
+  opacity: 0.45;
+}
+
+/* ── Genre cards grid ── */
+.music-section__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.music-section__card {
+  /*
+   * Each card gets a unique accent colour through the
+   * --card-accent custom property set inline by React.
+   */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+
+  /* Flex property to allow normal stretch & centering */
+  flex: 1 1 190px;
+  max-width: 240px;
+
+  /* Glassmorphism card */
+  background: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 15%, rgba(65, 69, 89, 0.45));
+  /* surface0 @ 45 % */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(186, 187, 241, 0.08);
+  /* very faint lavender */
+
+  /* Transition everything for smooth hover */
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.music-section__card:hover {
+  transform: translateY(-4px);
+  background: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 25%, rgba(65, 69, 89, 0.65));
+  border-color: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 50%, rgba(186, 187, 241, 0.18));
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 0 0 1px color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 50%, rgba(186, 187, 241, 0.06));
+}
+
+.music-section__card-emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.music-section__card-name {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ctp-text);
+  text-align: center;
+}
+
+/* ── "Explore all" link ── */
+.music-section__see-all {
+  display: block;
+  margin-top: 1.75rem;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ctp-lavender);
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.music-section__see-all:hover {
+  color: var(--ctp-pink);
+}
+
+/* ===================================================
+   Music Subpage — /music
+   Apple Music dark-mode colour scheme (scoped to .music-page only)
+   =================================================== */
+
+/*
+ * Apple Music dark-mode palette (used only on the music subpage):
+ *   --am-bg:      #1c1c1e   (near-black background)
+ *   --am-card:    #2c2c2e   (elevated surface / cards)
+ *   --am-border:  #3a3a3c   (subtle borders)
+ *   --am-text:    #f5f5f7   (primary text)
+ *   --am-text2:   #a1a1a6   (secondary text)
+ *   --am-red:     #fc3c44   (Apple Music accent red)
+ *   --am-red-dim: #d93239   (hover / dimmed red)
+ */
+.music-page {
+  --am-bg: #1c1c1e;
+  --am-card: #2c2c2e;
+  --am-border: #3a3a3c;
+  --am-text: #f5f5f7;
+  --am-text2: #a1a1a6;
+  --am-red: #D6003B;
+  --am-red-dim: #271A1F;
+
+  min-height: 100vh;
+  padding: 2.5rem 1.5rem 4rem;
+  max-width: 760px;
+  margin: 0 auto;
+  animation: fadeInUp 0.6s ease-out both;
+
+  /* Override the global Catppuccin background for this page */
+  background-color: var(--am-bg);
+  color: var(--am-text);
+}
+
+@media (max-width: 480px) {
+  .music-page {
+    padding: 2.5rem 2rem 4rem;
+    /* More breathing room on small screens */
+  }
+}
+
+/* Make the body background match when on /music */
+body:has(.music-page) {
+  background-color: #1c1c1e;
+}
+
+/* ── Back link ── */
+.music-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--am-text2);
+  margin-bottom: 2.5rem;
+  transition: color 0.2s ease;
+}
+
+.music-page__back:hover {
+  color: var(--am-red);
+}
+
+.music-page__back-arrow {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.music-page__back:hover .music-page__back-arrow {
+  transform: translateX(-3px);
+}
+
+/* ── Page header ── */
+.music-page__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.music-page__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+
+  /* Apple Music red gradient */
+  background: linear-gradient(135deg,
+      var(--am-red),
+      #ff6b6b,
+      var(--am-red));
+  background-size: 200% 200%;
+  animation: shimmer 4s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.music-page__subtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--am-text2);
+  margin-top: 0.4rem;
+}
+
+.music-page__warning {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--am-text2);
+  margin-top: 0.6rem;
+  opacity: 0.7;
+}
+
+.music-page__warning strong {
+  color: var(--am-red);
+}
+
+.music-page__divider {
+  width: 48px;
+  height: 2px;
+  margin: 1.25rem auto 0;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+      transparent,
+      var(--am-red),
+      transparent);
+  opacity: 0.45;
+}
+
+/* ── Jump-link navigation ── */
+.music-page__nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.music-page__nav-link {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--am-text2);
+  text-transform: lowercase;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.music-page__nav-link:hover {
+  color: var(--am-text);
+  background: var(--am-card);
+}
+
+.music-page__nav-dot {
+  color: var(--am-border);
+  font-size: 0.9rem;
+}
+
+/* ── Section blocks ── */
+.music-page__section {
+  margin-bottom: 3rem;
+  /* Offset for the anchor so the heading isn't hidden under the top */
+  scroll-margin-top: 2rem;
+}
+
+.music-page__section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 2.5vw, 3rem);
+  font-weight: 600;
+  color: var(--am-text);
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--am-border);
+}
+
+/* ── Boxes container (flex, wraps on mobile) ── */
+.music-page__boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ── Individual music box ── */
+.music-box {
+  flex: 1 1 300px;
+  /* side-by-side, wrap at 300px; stretches vertically freely */
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  background: var(--am-card);
+  border: 1px solid var(--am-border);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.music-box:hover {
+  border-color: var(--am-red);
+  box-shadow: 0 4px 20px rgba(252, 60, 68, 0.08);
+}
+
+/* Make the first item take up the full width so it's the "biggest" (#1 rank) */
+.music-box:first-child {
+  flex-basis: 100%;
+}
+
+/* Box header — rank + title */
+.music-box__header {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--am-border);
+}
+
+.music-box__rank {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--am-red);
+  min-width: 1.75rem;
+}
+
+/* Title + artist stacked vertically, inline with rank */
+.music-box__titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.music-box__title {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--am-text);
+}
+
+.music-box__artist {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--am-text2);
+}
+
+/* Description */
+.music-box__description {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--am-text2);
+  padding: 0.85rem 1rem;
+  line-height: 1.5;
+  flex: 1;
+  /* push embed to the bottom */
+}
+
+/* Embed wrapper — contains the iframe + loading overlay */
+.music-box__embed-wrapper {
+  position: relative;
+  border-radius: 0 0 14px 14px;
+  overflow: hidden;
+}
+
+/* Loading placeholder overlay */
+.music-box__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--am-card);
+  border-radius: 0 0 14px 14px;
+  z-index: 1;
+}
+
+.music-box__loading-text {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--am-text2);
+  opacity: 0.6;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Embed iframe — starts invisible, fades in when loaded */
+.music-box__embed {
+  width: 100%;
+  border: none;
+  border-radius: 0 0 14px 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.music-box__embed--loaded {
+  opacity: 1;
+}
+
+/* Artist image (used in ArtistBox instead of iframe) */
+.music-box__image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 0 0 14px 14px;
+}
+
+.music-box__image-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--am-card), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.music-box__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder when no embed URL is set */
+.music-box__embed-placeholder {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--am-text2);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  opacity: 0.5;
+}
+
+/* ── Placeholder text (kept for any future use) ── */
+.music-page__placeholder {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--am-text2);
+  padding: 2rem;
+  text-align: center;
+  border-radius: 12px;
+  background: var(--am-card);
+  border: 1px solid var(--am-border);
+  width: 100%;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .music-section__grid {
+    gap: 0.75rem;
+  }
+
+  .music-section__card {
+    padding: 0.85rem 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .music-page__nav {
+    gap: 0.4rem;
+  }
+
+  /* Stack boxes into a single column on small screens */
+  .music-page__boxes {
+    flex-direction: column;
+    gap: 1.5rem;
+    /* More space between stacked boxes */
+  }
+
+  .music-box {
+    flex-basis: auto;
+    margin-bottom: 0;
+  }
 }

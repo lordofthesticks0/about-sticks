@@ -1,0 +1,28 @@
+.hero-header__root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a192f;
+  /* Dark Blue */
+  margin: 0;
+}
+
+.hero-header__img {
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+  /* 50% Rounded Corners */
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.hero-header__title {
+  font-family: "Chiron GoRound TC", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  /* Bold */
+  color: #ffb7c5;
+  /* Soft Pastel Pink */
+  text-align: center;
+}
