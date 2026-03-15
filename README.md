@@ -5,21 +5,23 @@ okay so like, since you're this curious and you're checking out the source code:
   - it's deployed via netlify
 
 `i guess i'll put what i learned here then, as kind of a journal or log`
----
+
 # home page
 in this page i just got started learning react, i was pretty shocked how close it is, or i guess the fact that it literally IS just HTML but with JS like, shoehorned deep through it somehow. everything just works as expected, and you can use variables within the HTML itself instead of having to hardcode everything like a static site. 
 
 though i guess the home page is just a static site...
 
 but hey at least the learning curve won't be that bad, i thought to myself. at this point i was still thinking that it would be a single page thing (well, it kinda did, but not really a SPA in the traditional sense). still though, most of this was developed from gemini's boilerplate. while i did understand how i should be doing something like this in the future, i don't think i can start off an empty `App.jsx` or something...
----
+
+
 # music page
 this is where things get FUN. when making the music segment i (thankfully) quickly realize i didn't have enough space to put what i comfortably want here. i thought about some scroll takeover shi but like, i thought that would be a little too advanced for me that just wanted to make a sorta non static portofolio-ish site. so, i just use react-router for this. i could have used next.js, but there's too much vercel branding for when i wanted that (also i LITERALLY switched from next to react-vite because i didn't like it that much. i'll inevitably have to learn it though...)
 
 at first i thought, how would i kinda show the music right? like, i can't just say `oh yeah demi lovato's i will survive is so much better` or something without the song itself to back it up. so i actually first thought of youtube music, the one i actually use to listen to music. i also quickly realize that it didn't even want to play copyrighted songs and i just don't like it in the end. my next thought is actually spotify but i realize i can just use apple music...
 
 so there goes, now i have apple music embeds on them. it does slow the page pretty significantly, but it's not netlify loading it, so i'm not really hitting my limits or getting billed over this. it's inefficient but whatever. not like i can just host the rip of the song directly here without getting nuked. (i WAS actually about to do that but like, very quickly realize how quickly they'd nuke my site especially with autodetection), hell i even wanted to display **LYRICS**, just for the few parts i actually like along with 10s of audio or something. but i guess it is what it is.
----
+
+
 # games page 
 next up is the games page. at first it sounded simple, just copy what i already did at the music part, and like, add the games there myself right? no. very very wrong. well i mean, it could be right, but i didn't like that. i could have just embedded the steam store page there, but i wasn't really satisfied with that. i wanted something a little more. so i searched on how i can fetch data from steam and kinda dove into a little rabbit hole.
 
@@ -39,7 +41,7 @@ my suggestion was to split the function into two. the functions thmselves fetch 
 gemini in its infinite wisdom suggested caching to me. after the euphoria of knowing i independently discovered caching settles down, i stopped and realized that caching would store this in RAM, which doesn't sound likely to something like netlify. so i looked it up, and there's apparently something called `On-Demand Builders` or whatever the hell. apparently it does exactly what i proposed, set a `time to live` header on their data, and it will serve that data instead. it does count as a CDN, but it's just a couple of JSONs i don't really mind having to serve from my bandwidth for this. 
 
 so there it is. i **INDEPENDENTLY** thought about this btw. god idk why i'm so giddy about this, i need an ego check some time. 
----
+
 # future plans
 - anime page
 - movies page
@@ -50,4 +52,5 @@ i plan to incorporate an actual database in the future instead of hardcoding eve
 
 ---
 Merry Muslim Christmas!
+
 15/03/2026
