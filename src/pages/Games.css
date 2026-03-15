@@ -85,8 +85,14 @@ body:has(.games-page) {
   animation: fadeInUp 0.6s ease-out both;
 }
 
-.games-page__header { animation-delay: 0.1s; }
-.games-hero, .games-hero__details--mobile { animation-delay: 0.2s; }
+.games-page__header {
+  animation-delay: 0.1s;
+}
+
+.games-hero,
+.games-hero__details--mobile {
+  animation-delay: 0.2s;
+}
 
 .games-page__back-arrow {
   font-size: 1.1rem;
@@ -466,12 +472,11 @@ body:has(.games-page) {
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
 }
 
 .game-box__image-wrapper {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  /* Typical Steam capsule ratio */
   overflow: hidden;
   position: relative;
   background: #000;
@@ -479,8 +484,9 @@ body:has(.games-page) {
 
 .game-box__image {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
+  object-position: center;
   display: block;
   transition: transform 0.5s ease;
 }

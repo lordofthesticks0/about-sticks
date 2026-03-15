@@ -50,10 +50,10 @@ const TRACKS = [
         link: "https://music.apple.com/us/song/ballad-of-a-homeschooled-girl/1736995395",
     },
     {
-        title: "あの夢をなぞって",
-        artist: "YOASOBI",
-        description: "literally means 'Tracing That Dream', i really like the sound of the the absolutely phenomenal guitar they added here. all time classic. and the lyrics actually gives me goosebumps maaaannnn i want to shoot my shot and just confess at times :((",
-        link: "https://music.apple.com/us/song/ano-yume-wo-nazotte/1542182544",
+        title: "BALALAIKA",
+        artist: "9Lana",
+        description: "i won't pretend like i know what the lyrics means. it sounds good that's all i know. 9Lana is a great singer too :D",
+        link: "https://music.apple.com/us/song/balalaika/1726896238",
     },
 ];
 
