@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import "./Music.css";
 
 /*
  * Music subpage — /music
@@ -98,7 +99,7 @@ const ARTISTS = [
     {
         title: "Ado",
         description: "all she does is sing and she does it really good!!!!! she only recently revealed her face so she was literally faceless for like the entirety of her career. starts from uploading her covering songs and now making her own ones really really quickly. she also has like a huge range, both vocal and discography wise.",
-        image: "https://static.wikia.nocookie.net/nicodougasingers/images/b/b8/2025.01_%281_-_v1%29.jpg",
+        image: "https://cassette.sphdigital.com.sg/image/straitstimes/4713a448fcaa03945d766e0caca97c992ada9ae61b0f616c979926f135b0f6dd?w=900",
     },
     {
         title: "Avenged Sevenfold",
@@ -108,7 +109,7 @@ const ARTISTS = [
     {
         title: "DECO *27",
         description: "genuinely the greatest vocaloid artists out there. made it big and keeps on delivering. albeit there might be some misses some time, there's still a lot more hits to like. mostly talks about... idk really whatever it is his songs talks about. still like him though.",
-        image: "https://static.wikia.nocookie.net/project-diva/images/8/82/DECO27.png",
+        image: "https://viberate-upload.ams3.cdn.digitaloceanspaces.com/prod/entity/artist/deco-27-v6dnY",
     },
     {
         title: "Chappel Roan",

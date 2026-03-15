@@ -1,8 +1,8 @@
-import MusicSection from "../components/MusicSection";
+import Favourites from "../components/Favourites.tsx";
 
 /**
  * Home page — contains all the main sections of the site.
- * Right now it has the Hero Header and the Music section.
+ * Right now it has the Hero Header and the Favourites section.
  */
 function Home() {
     return (
@@ -32,8 +32,8 @@ function Home() {
                 </div>
             </section>
 
-            {/* ── Music Section ── */}
-            <MusicSection />
+            {/* ── Favourites Section ── */}
+            <Favourites />
         </>
     );
 }

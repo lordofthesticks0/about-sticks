@@ -73,3 +73,9 @@ dist-ssr
 .env*
 !.env.example
 >>>>>>> f130911 (initial commit)
+
+# Local Netlify folder
+.netlify
+
+# Examples
+.examples

@@ -1,0 +1,113 @@
+/* ===================================================
+   Favourites Section — homepage category grid
+   =================================================== */
+
+/* Fade-in for section on scroll */
+.favourites-section {
+  padding: 5rem 1.5rem 4rem;
+  max-width: 500px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+/* ── Section header ── */
+.favourites-section__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.favourites-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+
+  /* Same gradient-text treatment as the hero title */
+  background: linear-gradient(135deg,
+      var(--ctp-pink),
+      var(--ctp-mauve),
+      var(--ctp-blue));
+  background-size: 200% 200%;
+  animation: shimmer 4s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.favourites-section__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ctp-subtext0);
+  margin-top: 0.35rem;
+}
+
+.favourites-section__divider {
+  width: 48px;
+  height: 2px;
+  margin: 1.25rem auto 0;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+      transparent,
+      var(--ctp-lavender),
+      transparent);
+  opacity: 0.45;
+}
+
+/* ── Category cards grid ── */
+.favourites-section__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.favourites-section__card {
+  /*
+   * Each card gets a unique accent colour through the
+   * --card-accent custom property set inline by React.
+   */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+
+  /* Flex property to allow normal stretch & centering */
+  flex: 1 1 190px;
+  max-width: 240px;
+
+  /* Glassmorphism card */
+  background: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 15%, rgba(65, 69, 89, 0.45));
+  /* surface0 @ 45 % */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(186, 187, 241, 0.08);
+
+  /* Transition everything for smooth hover */
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.favourites-section__card:hover {
+  transform: translateY(-4px);
+  background: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 25%, rgba(65, 69, 89, 0.65));
+  border-color: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 50%, rgba(186, 187, 241, 0.18));
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.25),
+    0 0 0 1px color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 50%, rgba(186, 187, 241, 0.06));
+}
+
+.favourites-section__card-name {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ctp-text);
+  text-align: center;
+}
