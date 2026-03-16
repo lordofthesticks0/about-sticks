@@ -415,10 +415,6 @@ body:has(.games-page) {
     flex-direction: column;
   }
 
-  .game-box:nth-child(-n+2) .game-box__image-wrapper {
-    aspect-ratio: 16 / 9;
-  }
-
   .game-box:nth-child(-n+2) .game-box__stats {
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
