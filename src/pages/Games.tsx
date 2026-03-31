@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Games.css";
+// Placeholder background — only exists locally (.assets is gitignored).
+// import.meta.glob silently returns {} when the file is missing, so
+// production builds won't crash.
+const _placeholderMods = import.meta.glob(
+    "../../.assets/phosphophyllite-houseki-no-kuni.1920x1080.webm",
+    { eager: true, import: "default" },
+) as Record<string, string>;
+const placeholderBg: string | null = Object.values(_placeholderMods)[0] ?? null;
 
 /* ─────────────────────────────────────────────────────────
  * Static config — stuff that doesn't come from the API.
@@ -228,7 +236,7 @@ function Games() {
     const hoursPercentage = profile?.timecreated
         ? calculateHoursPercentage(totalMinutes, profile.timecreated)
         : "—";
-    const profileBackgroundUrl = profileItems?.profile_background ?? null;
+    const profileBackgroundUrl = profileItems?.profile_background ?? placeholderBg;
     const miniProfileBackgroundUrl = profileItems?.mini_profile_background ?? null;
     const avatarFrameUrl = profileItems?.avatar_frame ?? null;
     /* ── Build game list ── */

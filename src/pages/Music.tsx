@@ -112,9 +112,9 @@ const ARTISTS = [
         image: "https://viberate-upload.ams3.cdn.digitaloceanspaces.com/prod/entity/artist/deco-27-v6dnY",
     },
     {
-        title: "Chappel Roan",
-        description: "she has like, a really really good voice, and although i can't really relate to her songs i can tell she's having fun and damnit that's all i need. the songs she sings are also just plain dumb fun and it sounds like she's singing with a fat smile on her own face.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/8/84/ChappellRoanRockES200825-198_%28cropped%29.jpg",
+        title: "Polyphia",
+        description: "them fingers the goat. lowk kinda scary what they can do. no vocals no nothing, just aura or whatever the kids say these days",
+        image: "https://guitar.com/wp-content/uploads/2022/10/Polyphia-Credit-Press-HERO@2560x1625.jpg",
     },
 ];
 
