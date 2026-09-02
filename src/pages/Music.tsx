@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Music.css";
 import { useSiteContent } from "../lib/use-site-content.ts";
+import { useCurrentSong } from "../lib/use-current-song.ts";
 import type { MusicArtist, MusicEntry } from "../lib/site-content.ts";
 
 /*
@@ -115,6 +116,108 @@ function MusicBox({ rank, title, artist, description, link, embedHeight = 175 }:
     );
 }
 
+function CurrentSong() {
+    const { metadata, lyrics, loading, error } = useCurrentSong();
+    const lyricsRef = useRef<BraccatoLyricsElement>(null);
+    const [braccatoReady, setBraccatoReady] = useState(false);
+    const [parsedLyrics, setParsedLyrics] = useState<BraccatoLyric[] | null>(null);
+
+    // Register the braccato custom element and parse lyrics
+    useEffect(() => {
+        if (!lyrics || braccatoReady) return;
+
+        Promise.all([
+            import("@braccato/core/element"),
+            import("@braccato/core/styles/variables.css"),
+            import("@braccato/core/styles/lyrics.css"),
+            import("@braccato/core/styles/instrumental.css"),
+            import("@braccato/parsers"),
+        ])
+            .then(([, , , , parsers]) => {
+                const parsed = parsers.TTMLParser.parse(lyrics);
+                setParsedLyrics(parsed);
+                setBraccatoReady(true);
+            })
+            .catch((err) => console.error("Failed to load braccato/parsers:", err));
+    }, [lyrics, braccatoReady]);
+
+    // Apply lyrics to the braccato element once both are ready
+    useEffect(() => {
+        const el = lyricsRef.current;
+        if (!el || !braccatoReady || !parsedLyrics) return;
+        el.lyrics = parsedLyrics;
+    }, [braccatoReady, parsedLyrics]);
+
+    // Advance braccato's playback via requestAnimationFrame — no audio needed
+    useEffect(() => {
+        const el = lyricsRef.current;
+        if (!el || !braccatoReady) return;
+
+        el.source = null;
+        el.playing = true;
+
+        const start = performance.now();
+        let frame: number;
+
+        const tick = (now: number) => {
+            el.currentTime = (now - start) / 1000;
+            frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+
+        return () => {
+            cancelAnimationFrame(frame);
+            el.playing = false;
+        };
+    }, [braccatoReady]);
+
+    if (loading) {
+        return (
+            <section className="music-page__section current-song">
+                <h2 className="current-song__header">currently listening</h2>
+                <div className="current-song__loading">loading…</div>
+            </section>
+        );
+    }
+
+    if (error || !metadata) {
+        return null;
+    }
+
+    return (
+        <section className="music-page__section current-song">
+            <h2 className="current-song__header">currently listening</h2>
+
+            <div className="current-song__card">
+                <div className="current-song__card-info">
+                    <img
+                        className="current-song__cover"
+                        src={metadata.coverImage}
+                        alt={metadata.album}
+                    />
+                    <div className="current-song__titles">
+                        <span className="current-song__title">{metadata.title} <span className="current-song__dot">·</span> {metadata.album}</span>
+                        <span className="current-song__artist">{metadata.artist}</span>
+                    </div>
+                </div>
+
+                <div className="current-song__lyrics-wrap">
+                    {braccatoReady ? (
+                        // @ts-expect-error braccato-lyrics is a custom element not in JSX.IntrinsicElements
+                        <braccato-lyrics ref={lyricsRef} />
+                    ) : (
+                        <div className="current-song__lyrics-placeholder">
+                            loading lyrics…
+                        </div>
+                    )}
+                </div>
+
+                <span className="current-song__subtitle">lyrics from Apple Music</span>
+            </div>
+        </section>
+    );
+}
+
 function Music() {
     const { pathname, hash } = useLocation();
     const { content, loading, error } = useSiteContent();
@@ -166,6 +269,9 @@ function Music() {
                 </p>
                 <hr className="music-page__divider" />
             </div>
+
+            {/* Currently listening */}
+            <CurrentSong />
 
             {/* Jump-links nav */}
             <nav className="music-page__nav">
