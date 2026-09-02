@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Music.css";
+import { useSiteContent } from "../lib/use-site-content.ts";
+import type { MusicArtist, MusicEntry } from "../lib/site-content.ts";
 
 /*
  * Music subpage — /music
@@ -23,100 +25,6 @@ function toEmbedUrl(shareLink: string): string {
     if (!shareLink) return "";
     return shareLink.replace("https://", "https://embed.") + "?theme=dark";
 }
-
-const TRACKS = [
-    {
-        title: "Anklebiters",
-        artist: "Paramore",
-        description: "I LOVE PARAMORE!!!! ok so this song in particular really hits me. i've been having problems with myself and this song really does let me '...fall in love with myself' as it said. GOD i love paramore.",
-        link: "https://music.apple.com/us/song/anklebiters/593148442",
-    },
-    {
-        title: "I Love You, I'm Sorry",
-        artist: "Gracie Abrams",
-        description: "oh woooow a love song that's crazyyy... but like for real, i kinda want to say this to someone tbh, but it is what it is sometimes isn't it? anyways, Gracie Abrams herself really have a phenomenal voice for her performance. all in all it's a damn good song.",
-        link: "https://music.apple.com/us/song/i-love-you-im-sorry/1773474469",
-    },
-    {
-        title: "The Reckless and The Brave",
-        artist: "All Time Low",
-        description: "i mean it sounds really good can you blame me? it's just dumb fun, ATL cooked hard on the guitar and the tunes, overanalyzing the lyrics is just too much. no avant garde bullshit, it just sounds good.",
-        link: "https://music.apple.com/us/song/the-reckless-and-the-brave/687527846",
-    },
-    {
-        title: "ballad of a homeschooled girl",
-        artist: "Olivia Rodrigo",
-        description: "unfortunately it kinda describes my social life... OR AT LEAST IT ALMOST DID. i'm glad that i have friends who can power me through that phase, but pleeaseee if you relate to this song talk to your friends <3",
-        link: "https://music.apple.com/us/song/ballad-of-a-homeschooled-girl/1736995395",
-    },
-    {
-        title: "BALALAIKA",
-        artist: "9Lana",
-        description: "i won't pretend like i know what the lyrics means. it sounds good that's all i know. 9Lana is a great singer too :D",
-        link: "https://music.apple.com/us/song/balalaika/1726896238",
-    },
-];
-
-const ALBUMS = [
-    {
-        title: "After Laughter",
-        artist: "Paramore",
-        description: "this album kinda signifies how paramore changed from an emo punk band to something a little more pop. they were experimenting with this and it actually worked. it's actually so good to listen to and in general a vibe. even the songs hit too, they mostly talk about dealing with ageing and just depression. phenomenal album by the genuine GOAT.",
-        link: "https://music.apple.com/us/album/after-laughter/1227049864",
-    },
-    {
-        title: "GUTS (spilled)",
-        artist: "Olivia Rodrigo",
-        description: "mostly talks about how she herself grew up and the difficulties she face. even though i don't really relate too much, but the album itself is an experiment, it's not just 'pure' pop like her previous album, but this one actually have rock elements inside. i really like it, she's leaning to something like Avril Lavigne and she lowkey cooked.",
-        link: "https://music.apple.com/us/album/guts-spilled/1736994915",
-    },
-    {
-        title: "What is Love? (Deluxe)",
-        artist: "Clean Bandit",
-        description: "this one is rather old, though still the whole album has nothing but bangers. genuinely fun to listen to. it's like a song you can dance to but the lyrics are somewhat bittersweet and it somehow just works. really love it.",
-        link: "https://music.apple.com/us/album/what-is-love-deluxe/1436738680",
-    },
-    {
-        title: "From Zero (Deluxe Edition)",
-        artist: "Linkin Park",
-        description: "i can't lie man, it just sounds good and really makes you wanna wake up and do things. i mean linkin park was entirely different before this album, it's almost like they changed everyone to someone else. something something The Ship of Theseus. still really good though.",
-        link: "https://music.apple.com/us/album/from-zero-deluxe-edition/1801842323",
-    },
-    {
-        title: "Short n Sweet (Deluxe)",
-        artist: "Sabrina Carpenter",
-        description: "i'm no girl but i think i can appreciate her transformation and honesty. she practically became independent and free herself from her old disney princess shit that didn't really took off, so she instead punches bad exes in the gut and the music industry too while at it. also it's a vibe.",
-        link: "https://music.apple.com/us/album/short-n-sweet-deluxe/1795512297",
-    },
-];
-
-const ARTISTS = [
-    {
-        title: "Paramore",
-        description: "i love paramore i love paramore i love paramore I LOVEE PARAMOREEEEE!!! their songs are so fun to listen to, it's always upbeat, but there's always some meaning you can extract that's also fun to extract. they have a really wide range from punk, mellow pop, and the latest one is straight up alt pop. i REALLY love them.",
-        image: "https://www.nme.com/wp-content/uploads/2023/02/NME-PARAMORE-2023-2-credit-Zachary-Gray@2160x2700.jpg",
-    },
-    {
-        title: "Ado",
-        description: "all she does is sing and she does it really good!!!!! she only recently revealed her face so she was literally faceless for like the entirety of her career. starts from uploading her covering songs and now making her own ones really really quickly. she also has like a huge range, both vocal and discography wise.",
-        image: "https://cassette.sphdigital.com.sg/image/straitstimes/4713a448fcaa03945d766e0caca97c992ada9ae61b0f616c979926f135b0f6dd?w=900",
-    },
-    {
-        title: "Avenged Sevenfold",
-        description: "had a lot of history with them, and putting them anywhere below my 3rd favourite artist would be a major disrespect. i'd be listening to boring whatever's popular pop without them. their songs are just so fun and lifts your own spirit to a mile high.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Avenged_Sevenfold_2.jpg",
-    },
-    {
-        title: "DECO *27",
-        description: "genuinely the greatest vocaloid artists out there. made it big and keeps on delivering. albeit there might be some misses some time, there's still a lot more hits to like. mostly talks about... idk really whatever it is his songs talks about. still like him though.",
-        image: "https://viberate-upload.ams3.cdn.digitaloceanspaces.com/prod/entity/artist/deco-27-v6dnY",
-    },
-    {
-        title: "Polyphia",
-        description: "them fingers the goat. lowk kinda scary what they can do. no vocals no nothing, just aura or whatever the kids say these days",
-        image: "https://guitar.com/wp-content/uploads/2022/10/Polyphia-Credit-Press-HERO@2560x1625.jpg",
-    },
-];
 
 /**
  * ArtistBox — like MusicBox but shows an image instead of an iframe.
@@ -209,6 +117,7 @@ function MusicBox({ rank, title, artist, description, link, embedHeight = 175 }:
 
 function Music() {
     const { pathname, hash } = useLocation();
+    const { content, loading, error } = useSiteContent();
 
     useEffect(() => {
         if (hash) {
@@ -226,6 +135,18 @@ function Music() {
         }
     }, [pathname, hash]);
 
+    if (!content) {
+        return (
+            <main className="music-page">
+                <Link to="/" className="music-page__back">← back home</Link>
+                <div className="music-page__header">
+                    <h1 className="music-page__title">music</h1>
+                    <p className="music-page__subtitle">{loading ? "loading…" : error}</p>
+                </div>
+            </main>
+        );
+    }
+
     return (
         <main className="music-page">
             {/* Back button */}
@@ -238,10 +159,10 @@ function Music() {
             <div className="music-page__header">
                 <h1 className="music-page__title">music</h1>
                 <p className="music-page__subtitle">
-                    lol i had to change the colours because apple music embeds can't be assed
+                    {content.music.subtitle}
                 </p>
                 <p className="music-page__warning">
-                    warning: the embeds are <strong>LOUD</strong>, i can't change their volumes.
+                    {content.music.warning}
                 </p>
                 <hr className="music-page__divider" />
             </div>
@@ -259,8 +180,8 @@ function Music() {
             <section className="music-page__section" id="tracks">
                 <h2 className="music-page__section-title">tracks</h2>
                 <div className="music-page__boxes">
-                    {TRACKS.map((item, i) => (
-                        <MusicBox key={i} rank={i + 1} embedHeight={175} {...item} />
+                    {content.music.tracks.map((item: MusicEntry, i) => (
+                        <MusicBox key={item.id} rank={i + 1} embedHeight={175} {...item} />
                     ))}
                 </div>
             </section>
@@ -269,8 +190,8 @@ function Music() {
             <section className="music-page__section" id="albums">
                 <h2 className="music-page__section-title">albums</h2>
                 <div className="music-page__boxes">
-                    {ALBUMS.map((item, i) => (
-                        <MusicBox key={i} rank={i + 1} embedHeight={450} {...item} />
+                    {content.music.albums.map((item: MusicEntry, i) => (
+                        <MusicBox key={item.id} rank={i + 1} embedHeight={450} {...item} />
                     ))}
                 </div>
             </section>
@@ -279,8 +200,8 @@ function Music() {
             <section className="music-page__section" id="artists">
                 <h2 className="music-page__section-title">artists</h2>
                 <div className="music-page__boxes">
-                    {ARTISTS.map((item, i) => (
-                        <ArtistBox key={i} rank={i + 1} {...item} />
+                    {content.music.artists.map((item: MusicArtist, i) => (
+                        <ArtistBox key={item.id} rank={i + 1} {...item} />
                     ))}
                 </div>
             </section>

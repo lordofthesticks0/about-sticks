@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Favourites.css";
+import { useSiteContent } from "../lib/use-site-content.ts";
 
 /**
  * Favourites — shown on the home page.
@@ -7,17 +8,9 @@ import "./Favourites.css";
  * Displays clickable cards that link to different hobby pages.
  */
 
-const CATEGORIES = [
-    { name: "Music", color: "#fc3c44", path: "/music" },
-    { name: "Games", color: "#171a21", path: "/games" },
-    { name: "Movies", color: "#f5c518", path: "/movies" },
-    { name: "Anime", color: "#02a9ff", path: "/anime" }
-    // { name: "People", color: "#c812adff", path: "" }
-    // lol as if i'll ever tell anyone i like may
-    // remind me to remove this line in 3 years when i get over her
-];
-
 function Favourites() {
+    const { content, loading, error } = useSiteContent();
+
     return (
         <section className="favourites-section" id="favourites">
             {/* Section heading */}
@@ -29,7 +22,7 @@ function Favourites() {
 
             {/* Category cards */}
             <div className="favourites-section__grid">
-                {CATEGORIES.map((cat) => (
+                {content?.categories.map((cat) => (
                     <Link
                         key={cat.name}
                         to={cat.path}
@@ -40,6 +33,7 @@ function Favourites() {
                     </Link>
                 ))}
             </div>
+            {!content && <p>{loading ? "loading…" : error}</p>}
         </section>
     );
 }

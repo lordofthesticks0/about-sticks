@@ -1,9 +1,6 @@
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - esbuild
-  - netlify
-  - sharp
-  - unix-dgram
-
-pnpm:
-  dangerouslyAllowAllBuilds: true
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  netlify: true
+  sharp: true
+  unix-dgram: true

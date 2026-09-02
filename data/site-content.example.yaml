@@ -1,0 +1,162 @@
+schemaVersion: 1
+
+home:
+  avatarUrl: "https://cdn.discordapp.com/avatars/546229347703586839/2dc08467c2eee98f79a3fa2e22940fc2.png?size=256"
+  avatarAlt: "me!!! (not really)"
+  title: "hey there "
+  subtitle: "welcome to my site!!"
+  subsubtitle: "this was only like 10% vibecoded i swear the purple is catppuccin"
+
+categories:
+  - name: Music
+    color: "#fc3c44"
+    path: /music
+  - name: Games
+    color: "#171a21"
+    path: /games
+  - name: Movies
+    color: "#f5c518"
+    path: /movies
+  - name: Anime
+    color: "#02a9ff"
+    path: /anime
+
+music:
+  subtitle: "lol i had to change the colours because apple music embeds can't be assed"
+  warning: "warning: the embeds are LOUD, i can't change their volumes."
+  tracks:
+    - id: anklebiters
+      title: Anklebiters
+      artist: Paramore
+      description: >-
+        I LOVE PARAMORE!!!! ok so this song in particular really hits me. i've been having problems with myself and this song really does let me '...fall in love with myself' as it said. GOD i love paramore.
+      link: https://music.apple.com/us/song/anklebiters/593148442
+    - id: i-love-you-im-sorry
+      title: "I Love You, I'm Sorry"
+      artist: Gracie Abrams
+      description: >-
+        oh woooow a love song that's crazyyy... but like for real, i kinda want to say this to someone tbh, but it is what it is sometimes isn't it? anyways, Gracie Abrams herself really have a phenomenal voice for her performance. all in all it's a damn good song.
+      link: https://music.apple.com/us/song/i-love-you-im-sorry/1773474469
+    - id: the-reckless-and-the-brave
+      title: The Reckless and The Brave
+      artist: All Time Low
+      description: >-
+        i mean it sounds really good can you blame me? it's just dumb fun, ATL cooked hard on the guitar and the tunes, overanalyzing the lyrics is just too much. no avant garde bullshit, it just sounds good.
+      link: https://music.apple.com/us/song/the-reckless-and-the-brave/687527846
+    - id: ballad-of-a-homeschooled-girl
+      title: ballad of a homeschooled girl
+      artist: Olivia Rodrigo
+      description: >-
+        unfortunately it kinda describes my social life... OR AT LEAST IT ALMOST DID. i'm glad that i have friends who can power me through that phase, but pleeaseee if you relate to this song talk to your friends <3
+      link: https://music.apple.com/us/song/ballad-of-a-homeschooled-girl/1736995395
+    - id: balalaika
+      title: BALALAIKA
+      artist: 9Lana
+      description: >-
+        i won't pretend like i know what the lyrics means. it sounds good that's all i know. 9Lana is a great singer too :D
+      link: https://music.apple.com/us/song/balalaika/1726896238
+
+  albums:
+    - id: after-laughter
+      title: After Laughter
+      artist: Paramore
+      description: >-
+        this album kinda signifies how paramore changed from an emo punk band to something a little more pop. they were experimenting with this and it actually worked. it's actually so good to listen to and in general a vibe. even the songs hit too, they mostly talk about dealing with ageing and just depression. phenomenal album by the genuine GOAT.
+      link: https://music.apple.com/us/album/after-laughter/1227049864
+    - id: guts-spilled
+      title: GUTS (spilled)
+      artist: Olivia Rodrigo
+      description: >-
+        mostly talks about how she herself grew up and the difficulties she face. even though i don't really relate too much, but the album itself is an experiment, it's not just 'pure' pop like her previous album, but this one actually have rock elements inside. i really like it, she's leaning to something like Avril Lavigne and she lowkey cooked.
+      link: https://music.apple.com/us/album/guts-spilled/1736994915
+    - id: what-is-love-deluxe
+      title: "What is Love? (Deluxe)"
+      artist: Clean Bandit
+      description: >-
+        this one is rather old, though still the whole album has nothing but bangers. genuinely fun to listen to. it's like a song you can dance to but the lyrics are somewhat bittersweet and it somehow just works. really love it.
+      link: https://music.apple.com/us/album/what-is-love-deluxe/1436738680
+    - id: from-zero-deluxe
+      title: From Zero (Deluxe Edition)
+      artist: Linkin Park
+      description: >-
+        i can't lie man, it just sounds good and really makes you wanna wake up and do things. i mean linkin park was entirely different before this album, it's almost like they changed everyone to someone else. something something The Ship of Theseus. still really good though.
+      link: https://music.apple.com/us/album/from-zero-deluxe-edition/1801842323
+    - id: short-n-sweet-deluxe
+      title: Short n Sweet (Deluxe)
+      artist: Sabrina Carpenter
+      description: >-
+        i'm no girl but i think i can appreciate her transformation and honesty. she practically became independent and free herself from her old disney princess shit that didn't really took off, so she instead punches bad exes in the gut and the music industry too while at it. also it's a vibe.
+      link: https://music.apple.com/us/album/short-n-sweet-deluxe/1795512297
+
+  artists:
+    - id: paramore
+      title: Paramore
+      description: >-
+        i love paramore i love paramore i love paramore I LOVEE PARAMOREEEEE!!! their songs are so fun to listen to, it's always upbeat, but there's always some meaning you can extract that's also fun to extract. they have a really wide range from punk, mellow pop, and the latest one is straight up alt pop. i REALLY love them.
+      image: https://www.nme.com/wp-content/uploads/2023/02/NME-PARAMORE-2023-2-credit-Zachary-Gray@2160x2700.jpg
+    - id: ado
+      title: Ado
+      description: >-
+        all she does is sing and she does it really good!!!!! she only recently revealed her face so she was literally faceless for like the entirety of her career. starts from uploading her covering songs and now making her own ones really really quickly. she also has like a huge range, both vocal and discography wise.
+      image: https://cassette.sphdigital.com.sg/image/straitstimes/4713a448fcaa03945d766e0caca97c992ada9ae61b0f616c979926f135b0f6dd?w=900
+    - id: avenged-sevenfold
+      title: Avenged Sevenfold
+      description: >-
+        had a lot of history with them, and putting them anywhere below my 3rd favourite artist would be a major disrespect. i'd be listening to boring whatever's popular pop without them. their songs are just so fun and lifts your own spirit to a mile high.
+      image: https://upload.wikimedia.org/wikipedia/commons/c/ca/Avenged_Sevenfold_2.jpg
+    - id: deco-27
+      title: "DECO *27"
+      description: >-
+        genuinely the greatest vocaloid artists out there. made it big and keeps on delivering. albeit there might be some misses some time, there's still a lot more hits to like. mostly talks about... idk really whatever it is his songs talks about. still like him though.
+      image: https://viberate-upload.ams3.cdn.digitaloceanspaces.com/prod/entity/artist/deco-27-v6dnY
+    - id: polyphia
+      title: Polyphia
+      description: >-
+        them fingers the goat. lowk kinda scary what they can do. no vocals no nothing, just aura or whatever the kids say these days
+      image: https://guitar.com/wp-content/uploads/2022/10/Polyphia-Credit-Press-HERO@2560x1625.jpg
+
+games:
+  steamId: "76561199002412925"
+  title: games
+  subtitle: "top 10 games of the history of mankind (objectively correct)"
+  items:
+    - appId: 1384160
+      title: Guilty Gear -STRIVE-
+      description: >-
+        people say it's for casuals... i lowkey agree..... BUT IT'S FUN!!! i am not going to pretend like learning 182 different gatlings per character on GGXrd or GGACPR is fun at all. because it's not. universalized gatlings is beautiful, the characters i play are fun enough and isn't wholly gutted so that's why i put up with it. first fighting game i ever played and still the most fun i ever had. genuine 10/10. absolute sweep.
+    - appId: 1030300
+      title: "Hollow Knight: Silksong"
+      description: >-
+        I HATE YOU TEAM CHERRY FOR MAKING ME LOVE THIS GAME!!!!!!!!!! it's hard yes (and genuine RAGEBAIT btw) but the movement is sooooo fun sometimes you almost forgot you had to walk back like 3 hours just to refight a boss. it's one of those games you remember being so fun but when you actually play it all you feel is dread, pain, and suffering. still fun tho <3
+    - appId: 391540
+      title: UNDERTALE
+      description: >-
+        this game pretty much shaped my childhood (and a lot of other people too). opened my worldview and made me like, woke or something. probably the first time i ever felt any emotion on a video game. (i swear i played more than 3 minutes i pirated it when i was a kid :D)
+    - appId: 526870
+      title: Satisfactory
+      description: >-
+        yet another casual game. you play this game, look at the clock, see it's 5, keep looking at the screen, then look at the clock again. still points to 5, but the sun is rising again for some reason.
+    - appId: 367520
+      title: Hollow Knight
+      description: >-
+        just cause the second game is number 2 don't mean i can't put the first one here LMAOOOOO like okay, the first one is still a really, really, really, really, really, really, really, really, REALLY good game on its own. it's fun mechanically, it's fun story wise, what can i say team cherry cooks i guess :D
+    - appId: 504230
+      title: Celeste
+      description: >-
+        the one word to describe the game is probably 'movementslop', like the sole reason it's so fun is because you zip around everywhere in lightning speed and it's just so fun doing that sometimes
+    - appId: 105600
+      title: Terraria
+      description: >-
+        fun with friends, fun alone (sometimes), fun pretty much any time. devs are sweethearts too i can't lie. modding is also like, HUGE in this game. you'll never get bored. one of the best time sinks i've ever bought
+    - appId: 1778820
+      title: TEKKEN 8
+      description: >-
+        WHY IS THIS HERE I HATE THIS GAME WHY DO I KEEP PLAYING IT??????? ragebait game 5/10 at best
+    - appId: 275850
+      title: "No Man's Sky"
+      description: >-
+        if i was creative and willing to put the time (and have friends to play this with) i would have like a trillion hours. one of its shortcomings is unfortunately that there's really so much to do but you don't really know why you should do them.
+    - appId: 548430
+      title: Deep Rock Galactic
+      description: >-
+        usually i hate shooters. this one is the exception. i'm still ass at aiming and allat but like, i can't deny the dumb fun of just shooting bugs and mining ores. has the same problem with no man's sky though, it gets boring without friends

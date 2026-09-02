@@ -1,5 +1,0 @@
-# bunfig.toml
-[install]
-# This prevents Bun from creating its own lockfile 
-# if you accidentally run a bun install command
-lockfile = false

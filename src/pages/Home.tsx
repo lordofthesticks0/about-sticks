@@ -1,28 +1,30 @@
 import Favourites from "../components/Favourites.tsx";
+import { useSiteContent } from "../lib/use-site-content.ts";
 
 /**
  * Home page — contains all the main sections of the site.
  * Right now it has the Hero Header and the Favourites section.
  */
 function Home() {
+    const { content, loading, error } = useSiteContent();
+    const home = content?.home;
+
     return (
         <>
             {/* ── Hero Header ── */}
             <section className="hero-header__root">
                 {/* Profile picture */}
                 <div className="hero-header__img-wrapper">
-                    <img
-                        className="hero-header__img"
-                        src="https://cdn.discordapp.com/avatars/546229347703586839/2dc08467c2eee98f79a3fa2e22940fc2.png?size=256"
-                        alt="me!!! (not really)"
-                    />
+                    {home?.avatarUrl && (
+                        <img className="hero-header__img" src={home.avatarUrl} alt={home.avatarAlt} />
+                    )}
                 </div>
 
                 {/* Title & subtitle */}
                 <div className="hero-header__content">
-                    <h1 className="hero-header__title">hey there </h1>
-                    <p className="hero-header__subtitle">welcome to my site!!</p>
-                    <p className="hero-header__subsubtitle">this was only like 10% vibecoded i swear the purple is catppuccin</p>
+                    <h1 className="hero-header__title">{home?.title ?? (loading ? "loading…" : "")}</h1>
+                    <p className="hero-header__subtitle">{home?.subtitle ?? ""}</p>
+                    <p className="hero-header__subsubtitle">{home?.subsubtitle ?? error ?? ""}</p>
                     <hr className="hero-header__divider" />
                 </div>
 

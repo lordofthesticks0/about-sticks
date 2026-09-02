@@ -7,6 +7,7 @@ import Movies from "./pages/Movies.tsx";
 import Anime from "./pages/Anime.tsx";
 import Footer from "./components/Footer.tsx";
 import ConstructionBanner from "./components/ConstructionBanner.tsx";
+import { SiteContentProvider } from "./lib/site-content-provider.tsx";
 
 /**
  * App — the root layout component.
@@ -17,7 +18,7 @@ import ConstructionBanner from "./components/ConstructionBanner.tsx";
  */
 function App() {
   return (
-    <>
+    <SiteContentProvider>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/music" element={<Music />} />
@@ -27,7 +28,7 @@ function App() {
       </Routes>
       <ConstructionBanner />
       <Footer />
-    </>
+    </SiteContentProvider>
   );
 }
 
