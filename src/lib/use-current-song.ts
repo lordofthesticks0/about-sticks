@@ -7,6 +7,8 @@ export interface CurrentSongMetadata {
     artist: string;
     album: string;
     coverImage: string;
+    duration?: number;
+    uploadedAt?: string;
 }
 
 /** Raw shape from light-content-example.json */
@@ -17,6 +19,7 @@ interface RawNowPlaying {
     album: string;
     artworkUrl: string;
     duration?: number;
+    uploadedAt?: string;
     albumId?: string;
     syncType?: string;
 }
@@ -24,6 +27,7 @@ interface RawNowPlaying {
 export interface CurrentSongState {
     metadata: CurrentSongMetadata | null;
     lyrics: string | null;
+    loadedAt: number | null;
     loading: boolean;
     error: string | null;
 }
@@ -32,6 +36,7 @@ export function useCurrentSong(): CurrentSongState {
     const [state, setState] = useState<CurrentSongState>({
         metadata: null,
         lyrics: null,
+        loadedAt: null,
         loading: true,
         error: null,
     });
@@ -53,6 +58,7 @@ export function useCurrentSong(): CurrentSongState {
                 setState({
                     metadata: data.metadata,
                     lyrics: data.lyrics,
+                    loadedAt: Date.now(),
                     loading: false,
                     error: null,
                 }),
@@ -61,11 +67,20 @@ export function useCurrentSong(): CurrentSongState {
                 if (error instanceof DOMException && error.name === "AbortError") return;
                 console.warn("Current song is unavailable; using committed fallback.", error);
                 const raw = fallbackData.nowPlaying as RawNowPlaying | undefined;
+                const fallbackLoadedAt = Date.now();
                 setState({
                     metadata: raw
-                        ? { title: raw.title, artist: raw.artist, album: raw.album, coverImage: raw.artworkUrl }
+                        ? {
+                              title: raw.title,
+                              artist: raw.artist,
+                              album: raw.album,
+                              coverImage: raw.artworkUrl,
+                              duration: raw.duration,
+                              uploadedAt: raw.uploadedAt,
+                          }
                         : null,
                     lyrics: fallbackLyrics,
+                    loadedAt: fallbackLoadedAt,
                     loading: false,
                     error: null,
                 });

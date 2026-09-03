@@ -117,10 +117,23 @@ function MusicBox({ rank, title, artist, description, link, embedHeight = 175 }:
 }
 
 function CurrentSong() {
-    const { metadata, lyrics, loading, error } = useCurrentSong();
+    const { metadata, lyrics, loadedAt, loading, error } = useCurrentSong();
     const lyricsRef = useRef<BraccatoLyricsElement>(null);
     const [braccatoReady, setBraccatoReady] = useState(false);
     const [parsedLyrics, setParsedLyrics] = useState<BraccatoLyric[] | null>(null);
+
+    // The upload marks the moment playback conceptually began. Keep this
+    // calculation based on wall-clock time so a reload does not reset lyrics.
+    const uploadedAt = metadata?.uploadedAt ? Date.parse(metadata.uploadedAt) : NaN;
+    const playbackOffset = Number.isFinite(uploadedAt) && loadedAt !== null
+        ? Math.max(0, (loadedAt - uploadedAt) / 1000)
+        : 0;
+    const lyricDuration = parsedLyrics?.reduce(
+        (latest, lyric) => Math.max(latest, (lyric.startTimeMs + lyric.durationMs) / 1000),
+        0,
+    ) ?? 0;
+    const duration = metadata?.duration ?? (lyricDuration > 0 ? lyricDuration : undefined);
+    const hasEnded = duration !== undefined && playbackOffset >= duration;
 
     // Register the braccato custom element and parse lyrics
     useEffect(() => {
@@ -154,13 +167,20 @@ function CurrentSong() {
         if (!el || !braccatoReady) return;
 
         el.source = null;
+
+        if (hasEnded) {
+            el.currentTime = duration ?? playbackOffset;
+            el.playing = false;
+            return;
+        }
+
         el.playing = true;
 
         const start = performance.now();
         let frame: number;
 
         const tick = (now: number) => {
-            el.currentTime = (now - start) / 1000;
+            el.currentTime = playbackOffset + (now - start) / 1000;
             frame = requestAnimationFrame(tick);
         };
         frame = requestAnimationFrame(tick);
@@ -169,12 +189,12 @@ function CurrentSong() {
             cancelAnimationFrame(frame);
             el.playing = false;
         };
-    }, [braccatoReady]);
+    }, [braccatoReady, duration, hasEnded, playbackOffset]);
 
     if (loading) {
         return (
             <section className="music-page__section current-song">
-                <h2 className="current-song__header">currently listening</h2>
+                <h2 className="current-song__header">listening to</h2>
                 <div className="current-song__loading">loading…</div>
             </section>
         );
@@ -186,7 +206,7 @@ function CurrentSong() {
 
     return (
         <section className="music-page__section current-song">
-            <h2 className="current-song__header">currently listening</h2>
+            <h2 className="current-song__header">{hasEnded ? "last listened" : "currently listening"}</h2>
 
             <div className="current-song__card">
                 <div className="current-song__card-info">
@@ -206,13 +226,11 @@ function CurrentSong() {
                         // @ts-expect-error braccato-lyrics is a custom element not in JSX.IntrinsicElements
                         <braccato-lyrics ref={lyricsRef} />
                     ) : (
-                        <div className="current-song__lyrics-placeholder">
-                            loading lyrics…
-                        </div>
+                        <div className="current-song__lyrics-placeholder">loading lyrics…</div>
                     )}
                 </div>
 
-                <span className="current-song__subtitle">lyrics from Apple Music</span>
+                <span className="current-song__subtitle">sorry for no audio, i might get in trouble if i do that :3</span>
             </div>
         </section>
     );

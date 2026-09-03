@@ -180,7 +180,7 @@ try {
         throw new Error("The content file must include games.steamId and at least one games.items entry");
     }
 } catch (error) {
-    throw new Error(`Invalid content YAML: ${error instanceof Error ? error.message : String(error)}`);
+    throw new Error(`Invalid content YAML: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
 }
 
 const steam = await fetchSteamSnapshot(parsedContent.games, steamApiKey);

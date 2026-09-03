@@ -62,6 +62,13 @@ try {
 
 const lyricsContent = await Bun.file(lyricsPath).text();
 
+// The timestamp is part of the metadata so every visitor can derive the
+// position this song would have reached since it was published.
+metadata = {
+    ...metadata,
+    uploadedAt: new Date().toISOString(),
+};
+
 const blobBase = [
     encodeURIComponent(siteId),
     encodeURIComponent(`site:${STORE_NAME}`),
