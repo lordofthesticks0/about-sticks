@@ -1,5 +1,5 @@
 const { builder } = require("@netlify/functions");
-const { getStore } = require("@netlify/blobs");
+const { connectLambda, getStore } = require("@netlify/blobs");
 
 const STORE_NAME = "about-sticks-content";
 const CONTENT_KEY = "site-content.json";
@@ -56,8 +56,11 @@ async function handler(event) {
   }
 
   try {
+    // These CommonJS handlers run in Lambda compatibility mode, so initialize
+    // the Blobs context from the Netlify event before opening the store.
+    connectLambda(event);
+
     const content = await getStore(STORE_NAME).get(CONTENT_KEY, {
-      consistency: "strong",
       type: "json",
     });
 

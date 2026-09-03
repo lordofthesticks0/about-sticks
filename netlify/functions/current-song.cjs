@@ -1,5 +1,5 @@
 const { builder } = require("@netlify/functions");
-const { getStore } = require("@netlify/blobs");
+const { connectLambda, getStore } = require("@netlify/blobs");
 
 const STORE_NAME = "about-sticks-content";
 const METADATA_KEY = "current-song-metadata.json";
@@ -15,10 +15,13 @@ async function handler(event) {
     }
 
     try {
+        // These CommonJS handlers run in Lambda compatibility mode, so initialize
+        // the Blobs context from the Netlify event before opening the store.
+        connectLambda(event);
+
         const store = getStore(STORE_NAME);
 
         const metadata = await store.get(METADATA_KEY, {
-            consistency: "strong",
             type: "json",
         });
 
@@ -30,7 +33,6 @@ async function handler(event) {
         }
 
         const lyrics = await store.get(LYRICS_KEY, {
-            consistency: "strong",
             type: "text",
         });
 
