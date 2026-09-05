@@ -187,7 +187,7 @@ const steam = await fetchSteamSnapshot(parsedContent.games, steamApiKey);
 const content = JSON.stringify({ ...parsedContent, steam });
 const blobPath = [
     encodeURIComponent(siteId),
-    encodeURIComponent(`site:${STORE_NAME}`),
+    `site:${encodeURIComponent(STORE_NAME)}`,
     encodeURIComponent(CONTENT_KEY),
 ].join("/");
 

@@ -71,7 +71,7 @@ metadata = {
 
 const blobBase = [
     encodeURIComponent(siteId),
-    encodeURIComponent(`site:${STORE_NAME}`),
+    `site:${encodeURIComponent(STORE_NAME)}`,
 ].join("/");
 
 await uploadBlob(

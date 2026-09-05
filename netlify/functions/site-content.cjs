@@ -67,6 +67,7 @@ async function handler(event) {
     if (content === null) {
       return {
         statusCode: 404,
+        ttl: 60,
         body: JSON.stringify({ error: `Missing blob: ${CONTENT_KEY}` }),
       };
     }
@@ -75,12 +76,14 @@ async function handler(event) {
       console.error(`Invalid site content in ${STORE_NAME}/${CONTENT_KEY}`);
       return {
         statusCode: 500,
+        ttl: 60,
         body: JSON.stringify({ error: "Site content has an invalid schema" }),
       };
     }
 
     return {
       statusCode: 200,
+      ttl: 60,
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
@@ -91,6 +94,7 @@ async function handler(event) {
     console.error("Could not read site content blob", error);
     return {
       statusCode: 500,
+      ttl: 60,
       body: JSON.stringify({ error: "Could not read site content" }),
     };
   }

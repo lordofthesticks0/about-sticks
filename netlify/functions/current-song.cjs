@@ -28,6 +28,7 @@ async function handler(event) {
         if (metadata === null) {
             return {
                 statusCode: 404,
+                ttl: 60,
                 body: JSON.stringify({ error: `Missing blob: ${METADATA_KEY}` }),
             };
         }
@@ -39,12 +40,14 @@ async function handler(event) {
         if (lyrics === null) {
             return {
                 statusCode: 404,
+                ttl: 60,
                 body: JSON.stringify({ error: `Missing blob: ${LYRICS_KEY}` }),
             };
         }
 
         return {
             statusCode: 200,
+            ttl: 60,
             headers: {
                 "Content-Type": "application/json",
                 "Cache-Control": "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
@@ -55,6 +58,7 @@ async function handler(event) {
         console.error("Could not read current song blobs", error);
         return {
             statusCode: 500,
+            ttl: 60,
             body: JSON.stringify({ error: "Could not read current song data" }),
         };
     }
