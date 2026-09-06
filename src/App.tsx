@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./pages/Home.tsx";
 import Music from "./pages/Music.tsx";
 import Games from "./pages/Games.tsx";
-import Movies from "./pages/Movies.tsx";
+import Moviseries from "./pages/Moviseries.tsx";
 import Anime from "./pages/Anime.tsx";
 import Footer from "./components/Footer.tsx";
 import ConstructionBanner from "./components/ConstructionBanner.tsx";
@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/music" element={<Music />} />
         <Route path="/games" element={<Games />} />
-        <Route path="/movies" element={<Movies />} />
+        <Route path="/moviseries" element={<Moviseries />} />
         <Route path="/anime" element={<Anime />} />
       </Routes>
       <ConstructionBanner />

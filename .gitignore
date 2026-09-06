@@ -10,6 +10,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.pnpm-store/
 
 # testing
 /coverage
@@ -79,3 +80,6 @@ dist-ssr
 
 # Examples
 .examples
+
+# Freebuff
+.freebuff

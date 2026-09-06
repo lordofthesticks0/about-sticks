@@ -59,8 +59,8 @@ While Tailwind would have been useful, I want to learn about CSS and how to use 
 - `/` — Home (`src/pages/Home.tsx`)
 - `/music` — Music (`src/pages/Music.tsx`)
 - `/games` — Games (`src/pages/Games.tsx`)
-- `/movies` — Movies (`src/pages/Movies.tsx`) — TODO
-- `/anime` — Anime (`src/pages/Anime.tsx`) — TODO
+- `/moviseries` — Moviseries (`src/pages/Moviseries.tsx`) — TODO
+- `/animanga` — Animanga (`src/pages/Animanga.tsx`) — TODO
 
 # Sections
 
@@ -94,10 +94,10 @@ While Tailwind would have been useful, I want to learn about CSS and how to use 
 - Skeleton loading states while data is being fetched.
 - Each file: `src/pages/Games.tsx`, `src/pages/Games.css`.
 
-## 4. Movies (`/movies`) — TODO
+## 4. Moviseries (`/moviseries`) — TODO
 - Placeholder page. To be built.
 
-## 5. Anime (`/anime`) — TODO
+## 5. Animanga (`/animanga`) — TODO
 - Placeholder page. To be built.
 
 # Global Components

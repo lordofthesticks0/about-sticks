@@ -23,9 +23,9 @@
 
   /* Same gradient-text treatment as the hero title */
   background: linear-gradient(135deg,
-      var(--ctp-pink),
-      var(--ctp-mauve),
-      var(--ctp-blue));
+      #ffffff,
+      #c9c9c9,
+      #ffffff);
   background-size: 200% 200%;
   animation: shimmer 4s ease infinite;
   -webkit-background-clip: text;
@@ -36,7 +36,7 @@
 .favourites-section__subtitle {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: var(--ctp-subtext0);
+  color: #b0b0b0;
   margin-top: 0.35rem;
 }
 
@@ -77,12 +77,12 @@
   flex: 1 1 190px;
   max-width: 240px;
 
-  /* Glassmorphism card */
+  /* Keep each card's accent colour in its normal state. */
   background: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 15%, rgba(65, 69, 89, 0.45));
   /* surface0 @ 45 % */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(186, 187, 241, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.28);
 
   /* Transition everything for smooth hover */
   transition:
@@ -97,17 +97,21 @@
 
 .favourites-section__card:hover {
   transform: translateY(-4px);
-  background: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 25%, rgba(65, 69, 89, 0.65));
-  border-color: color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 50%, rgba(186, 187, 241, 0.18));
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.82);
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.25),
-    0 0 0 1px color-mix(in srgb, var(--card-accent, var(--ctp-lavender)) 50%, rgba(186, 187, 241, 0.06));
+    0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.favourites-section__card:hover .favourites-section__card-name {
+  color: #fff;
 }
 
 .favourites-section__card-name {
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 500;
-  color: var(--ctp-text);
+  color: #e0e0e0;
   text-align: center;
 }

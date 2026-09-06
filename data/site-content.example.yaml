@@ -5,7 +5,7 @@ home:
   avatarAlt: "me!!! (not really)"
   title: "hey there "
   subtitle: "welcome to my site!!"
-  subsubtitle: "this was only like 10% vibecoded i swear the purple is catppuccin"
+  subsubtitle: "this wasn't really \"vibecoded\" see because i kinda understand what it actually does behind the scenes :D"
 
 categories:
   - name: Music
@@ -14,12 +14,12 @@ categories:
   - name: Games
     color: "#171a21"
     path: /games
-  - name: Movies
-    color: "#f5c518"
-    path: /movies
   - name: Anime
-    color: "#02a9ff"
+    color: "#aded0b"
     path: /anime
+  - name: Moviseries
+    color: "#f5c518"
+    path: /moviseries
 
 music:
   subtitle: "lol i had to change the colours because apple music embeds can't be assed"

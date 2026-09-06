@@ -1,11 +1,14 @@
 .site-footer {
+    position: relative;
+    z-index: 1;
     padding: 0.5rem 1.5rem 1rem;
     text-align: center;
     font-family: var(--font-body, sans-serif);
     font-size: 0.85rem;
     color: var(--ctp-subtext0);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    background-color: transparent;
+    background-color: #2D2D2D;
+    isolation: isolate;
     width: 100%;
 }
 
@@ -20,6 +23,7 @@
 .site-footer__text {
     margin: 0;
     opacity: 0.6;
+    color: #FFFFFF;
     transition: opacity 0.2s ease;
 }
 
@@ -28,14 +32,14 @@
 }
 
 .site-footer__link {
-    color: var(--ctp-lavender);
+    color: #9B59D0;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
 }
 
 .site-footer__link:hover {
-    color: var(--ctp-pink);
+    color: #FFF433;
 }
 
 /* If the body is in /music mode (darker bg), adjust colors slightly for visibility */

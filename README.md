@@ -47,8 +47,8 @@ gemini in its infinite wisdom suggested caching to me. after the euphoria of kno
 so there it is. i **INDEPENDENTLY** thought about this btw. god idk why i'm so giddy about this, i need an ego check some time. 
 
 # future plans
-- anime page
-- movies page
+- animanga page
+- moviseries page
 - projects page
 - personal blog (?)
 
