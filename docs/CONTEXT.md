@@ -123,10 +123,10 @@ The uploader writes to this site-wide Netlify Blobs location:
 
 The YAML document contains:
 
-- `schemaVersion` — currently `1`.
+- The content object is intentionally schema-flexible; fields can be added as the site grows.
 - `home` — avatar and hero text: `avatarUrl`, `avatarAlt`, `title`, `subtitle`, `subsubtitle`.
 - `categories` — objects with `name`, `color`, and `path`.
-- `music` — `subtitle`, `warning`, plus `tracks`, `albums`, and `artists` arrays.
+- `music` — `subtitle`, `warning`, plus `tracks` and `albums` arrays. Tracks also include a required lyric `quote`.
 - `games` — `steamId`, page `title` and `subtitle`, plus game `items` containing `appId`, `title`, and `description`.
 
 The uploader adds a generated `steam` object to the JSON blob. It contains the Steam profile, achievement percentages keyed by app ID, price data keyed by app ID, and equipped profile-item URLs. Individual Steam requests can fail without preventing the rest of the snapshot from being uploaded; unavailable parts are stored as `null` or per-game `null` values.
@@ -145,7 +145,7 @@ bun run content:upload -- /path/to/site-content.yaml
 
 The script uses raw HTTP requests to Netlify's Blobs API. It requests a signed upload URL with `NETLIFY_SITE_ID` and `NETLIFY_AUTH_TOKEN`, then sends the JSON payload to that URL. The write protocol uses `PUT` requests.
 
-The frontend requests the blob through `site-content`. If that request fails—for example, when running Vite without Netlify Dev—or the endpoint returns an error, it parses the committed YAML file as a fallback. The fallback contains no generated Steam snapshot, so slow Steam values are unavailable locally until a snapshot is uploaded; the `steam-fast` request remains separate.
+The frontend requests the blob through `site-content`. If that request fails—for example, when running Vite without Netlify Dev—or the endpoint returns an error, it parses the committed YAML file as a fallback. The fallback contains no generated Steam snapshot, so slow Steam values are unavailable locally until a snapshot is uploaded; the `steam-fast` request remains separate. The content endpoint does not enforce a fixed schema, so additional YAML fields pass through to the frontend unchanged.
 
 # Environment Variables
 - `STEAM_API_KEY` — Required by the Bun uploader to authenticate with the Steam Web API. Set locally when uploading and keep it out of committed files.

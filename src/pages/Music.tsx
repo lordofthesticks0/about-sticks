@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import fallbackData from "../../data/light-content-example.json";
 import "./Music.css";
 import { useSiteContent } from "../lib/use-site-content.ts";
 import { useCurrentSong } from "../lib/use-current-song.ts";
-import type { MusicArtist, MusicEntry } from "../lib/site-content.ts";
+import type { MusicEntry, MusicTrack } from "../lib/site-content.ts";
 
 /*
  * Music subpage — /music
  *
- * Three sections: Best Tracks, Best Albums, Best Artists.
- * Each has 5 boxes with a rank, title, artist, description, and embed.
+ * Two sections: Best Tracks and Best Albums.
+ * Each has boxes with a rank, title, artist, description, and embed.
  *
  * For the `link` field, just paste a normal Apple Music share link like:
  *   https://music.apple.com/us/song/anklebiters/593148442
@@ -28,51 +29,15 @@ function toEmbedUrl(shareLink: string): string {
 }
 
 /**
- * ArtistBox — like MusicBox but shows an image instead of an iframe.
- * Just paste an image URL into the `image` field.
- */
-function ArtistBox({ rank, title, description, image }: {
-    rank: number;
-    title: string;
-    description: string;
-    image: string;
-}) {
-    return (
-        <div className="music-box">
-            <div className="music-box__header">
-                <span className="music-box__rank">#{rank}</span>
-                <div className="music-box__titles">
-                    <span className="music-box__title">{title}</span>
-                </div>
-            </div>
-            {description && <p className="music-box__description">{description}</p>}
-            {image ? (
-                <div className="music-box__image-wrapper">
-                    <div className="music-box__image-gradient" />
-                    <img
-                        className="music-box__image"
-                        src={image}
-                        alt={title}
-                    />
-                </div>
-            ) : (
-                <div className="music-box__embed-placeholder">
-                    image coming soon!
-                </div>
-            )}
-        </div>
-    );
-}
-
-/**
- * A single "music box" — shows rank, title + artist, description,
+ * A single "music box" — shows rank, title + artist, description, an optional lyric quote,
  * and an Apple Music embed (auto-converted from a share link).
  */
-function MusicBox({ rank, title, artist, description, link, embedHeight = 175 }: {
+function MusicBox({ rank, title, artist, description, quote, link, embedHeight = 175 }: {
     rank: number;
     title: string;
     artist: string;
     description: string;
+    quote?: string;
     link: string;
     embedHeight?: number;
 }) {
@@ -89,6 +54,7 @@ function MusicBox({ rank, title, artist, description, link, embedHeight = 175 }:
                 </div>
             </div>
             <p className="music-box__description">{description}</p>
+            {quote && <p className="music-box__quote">“<em>{quote}</em>”</p>}
             {embedUrl ? (
                 <div className="music-box__embed-wrapper" style={{ height: embedHeight }}>
                     {/* Loading placeholder — visible until iframe fires onLoad */}
@@ -117,10 +83,11 @@ function MusicBox({ rank, title, artist, description, link, embedHeight = 175 }:
 }
 
 function CurrentSong() {
-    const { metadata, lyrics, loadedAt, loading, error } = useCurrentSong();
+    const { metadata, lyrics, loadedAt, loading, error, refresh } = useCurrentSong();
     const lyricsRef = useRef<BraccatoLyricsElement>(null);
     const [braccatoReady, setBraccatoReady] = useState(false);
     const [parsedLyrics, setParsedLyrics] = useState<BraccatoLyric[] | null>(null);
+    const fallbackCover = (fallbackData.nowPlaying as { artworkUrl?: string }).artworkUrl;
 
     // The upload marks the moment playback conceptually began. Keep this
     // calculation based on wall-clock time so a reload does not reset lyrics.
@@ -134,6 +101,17 @@ function CurrentSong() {
     ) ?? 0;
     const duration = metadata?.duration ?? (lyricDuration > 0 ? lyricDuration : undefined);
     const hasEnded = duration !== undefined && playbackOffset >= duration;
+
+    // Give the uploader a short grace period after playback ends, then check
+    // whether a new song was published. An unchanged/missing payload remains
+    // in the "last listened" state; a changed upload starts a new playback.
+    useEffect(() => {
+        if (!hasEnded) return;
+        const timeout = window.setTimeout(() => {
+            void refresh();
+        }, 10_000);
+        return () => window.clearTimeout(timeout);
+    }, [hasEnded, refresh]);
 
     // Register the braccato custom element and parse lyrics
     useEffect(() => {
@@ -214,6 +192,13 @@ function CurrentSong() {
                         className="current-song__cover"
                         src={metadata.coverImage}
                         alt={metadata.album}
+                        onError={(event) => {
+                            // Apple CDN artwork can occasionally fail independently
+                            // of the metadata request. Keep the card usable.
+                            if (fallbackCover && event.currentTarget.src !== fallbackCover) {
+                                event.currentTarget.src = fallbackCover;
+                            }
+                        }}
                     />
                     <div className="current-song__titles">
                         <span className="current-song__title">{metadata.title} <span className="current-song__dot">·</span> {metadata.album}</span>
@@ -296,15 +281,13 @@ function Music() {
                 <a href="#tracks" className="music-page__nav-link">tracks</a>
                 <span className="music-page__nav-dot">·</span>
                 <a href="#albums" className="music-page__nav-link">albums</a>
-                <span className="music-page__nav-dot">·</span>
-                <a href="#artists" className="music-page__nav-link">artists</a>
             </nav>
 
             {/* ── Best Tracks ── */}
             <section className="music-page__section" id="tracks">
                 <h2 className="music-page__section-title">tracks</h2>
                 <div className="music-page__boxes">
-                    {content.music.tracks.map((item: MusicEntry, i) => (
+                    {content.music.tracks.map((item: MusicTrack, i) => (
                         <MusicBox key={item.id} rank={i + 1} embedHeight={175} {...item} />
                     ))}
                 </div>
@@ -320,15 +303,6 @@ function Music() {
                 </div>
             </section>
 
-            {/* ── Best Artists ── */}
-            <section className="music-page__section" id="artists">
-                <h2 className="music-page__section-title">artists</h2>
-                <div className="music-page__boxes">
-                    {content.music.artists.map((item: MusicArtist, i) => (
-                        <ArtistBox key={item.id} rank={i + 1} {...item} />
-                    ))}
-                </div>
-            </section>
         </main>
     );
 }

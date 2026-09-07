@@ -20,11 +20,8 @@ export interface MusicEntry {
     link: string;
 }
 
-export interface MusicArtist {
-    id: string;
-    title: string;
-    description: string;
-    image: string;
+export interface MusicTrack extends MusicEntry {
+    quote: string;
 }
 
 export interface GameContent {
@@ -63,9 +60,8 @@ export interface SiteContent {
     music: {
         subtitle: string;
         warning: string;
-        tracks: MusicEntry[];
+        tracks: MusicTrack[];
         albums: MusicEntry[];
-        artists: MusicArtist[];
     };
     games: {
         steamId: string;

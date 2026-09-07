@@ -6,7 +6,7 @@ The editable site content is stored in a site-wide Netlify Blobs store:
 - Key: `site-content.json`
 - Reader endpoint: `/.netlify/functions/site-content`
 
-The committed file [`data/site-content.example.yaml`](../data/site-content.example.yaml) is the starter document and schema example. The Bun uploader parses it as YAML and sends the resulting JSON to Blobs, and the frontend also uses it as a local fallback when the Blobs endpoint cannot be reached.
+The committed file [`data/site-content.example.yaml`](../data/site-content.example.yaml) is the starter document. The Bun uploader parses it as YAML and sends the resulting JSON to Blobs, and the frontend also uses it as a local fallback when the Blobs endpoint cannot be reached.
 
 If the content endpoint is unavailable—for example, when running Vite without Netlify Dev—the frontend parses this committed YAML file and uses it as a local fallback. The fallback has no generated Steam snapshot, so the Games page will show unavailable slow Steam values until the blob is uploaded; the fast playtime request remains separate.
 
@@ -37,9 +37,11 @@ If the content endpoint is unavailable—for example, when running Vite without 
 
 The uploader first polls the slow Steam data sources (profile, achievements, prices, and equipped profile items), adds the result as the generated `steam` property, and then uses Netlify's raw HTTP Blobs protocol: an authenticated request obtains a signed upload URL, then the JSON is sent to that URL. The protocol uses `PUT` for both requests; no Netlify CLI or Blobs SDK is involved. You normally should not add or edit `steam` in the YAML source. You can inspect or download the live value from the Netlify UI under **Data & Storage → Blobs**. Changes are served through the content function with a short edge cache, so allow roughly a minute for an update to appear everywhere.
 
-## Expected schema
+## Content shape
 
-The YAML root must have `schemaVersion: 1`, plus `home`, `categories`, `music`, and `games`. The uploader adds the generated `steam` object to the JSON blob before uploading it.
+The content endpoint does not validate a fixed schema: it returns the parsed YAML object as-is, including additional fields. Add new content by adding fields to `data/site-content.example.yaml` and consuming those fields in the frontend. The uploader only requires `games.steamId` and a non-empty `games.items` array so it can refresh the generated `steam` object before uploading.
+
+The current example shape is:
 
 ```ts
 interface SiteContent {
@@ -59,14 +61,8 @@ interface SiteContent {
   music: {
     subtitle: string;
     warning: string;
-    tracks: MusicEntry[];
+    tracks: MusicTrack[];
     albums: MusicEntry[];
-    artists: Array<{
-      id: string;
-      title: string;
-      description: string;
-      image: string;
-    }>;
   };
   games: {
     steamId: string;
@@ -101,6 +97,10 @@ interface MusicEntry {
   artist: string;
   description: string;
   link: string; // normal Apple Music share URL
+}
+
+interface MusicTrack extends MusicEntry {
+  quote: string; // a favorite lyric excerpt
 }
 ```
 

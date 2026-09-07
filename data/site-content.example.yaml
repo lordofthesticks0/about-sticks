@@ -25,95 +25,73 @@ music:
   subtitle: "lol i had to change the colours because apple music embeds can't be assed"
   warning: "warning: the embeds are LOUD, i can't change their volumes."
   tracks:
-    - id: anklebiters
-      title: Anklebiters
+    - id: brick-by-boring-brick
+      title: Brick by Boring Brick
       artist: Paramore
       description: >-
-        I LOVE PARAMORE!!!! ok so this song in particular really hits me. i've been having problems with myself and this song really does let me '...fall in love with myself' as it said. GOD i love paramore.
-      link: https://music.apple.com/us/song/anklebiters/593148442
-    - id: i-love-you-im-sorry
-      title: "I Love You, I'm Sorry"
-      artist: Gracie Abrams
+        this song describes about how jean paramore aka hayley williams grows up from living in a "fairy tale somewhere too far for us to find". this song is genuinely personal to me because i grew up the same way. lived in a fairy tale where everything was fine but i never was. i had to fix myself brick by boring brick BUT ENOUGH ABOUT ME this song is amazing
+      quote: "The angles were all wrong now she's ripping wings off of butterflies"
+      link: https://music.apple.com/us/song/brick-by-boring-brick/607337423
+    - id: a-match-into-water
+      title: A Match Into Water
+      artist: Pierce The Veil
       description: >-
-        oh woooow a love song that's crazyyy... but like for real, i kinda want to say this to someone tbh, but it is what it is sometimes isn't it? anyways, Gracie Abrams herself really have a phenomenal voice for her performance. all in all it's a damn good song.
-      link: https://music.apple.com/us/song/i-love-you-im-sorry/1773474469
-    - id: the-reckless-and-the-brave
-      title: The Reckless and The Brave
-      artist: All Time Low
+        this song is meant to describe vic fuentes' girlfriend, who was diagnosed with breast cancer at the time. bro was NOT kidding when he said the chemicals will bring her home again. while i don't really have a sickly girlfriend (or anyone really), i can highkey somewhat relate to his concerns of being afraid to be left alone early, and some lines are particularly relatable in isolation
+      quote: "Bring her back or take me with her!"
+      link: https://music.apple.com/us/song/a-match-into-water/1440941958
+    - id: hate-to-see-your-heart-break-feat-joy-williams
+      title: "Hate to See Your Heart Break (feat. Joy Williams)"
+      artist: Paramore
       description: >-
-        i mean it sounds really good can you blame me? it's just dumb fun, ATL cooked hard on the guitar and the tunes, overanalyzing the lyrics is just too much. no avant garde bullshit, it just sounds good.
-      link: https://music.apple.com/us/song/the-reckless-and-the-brave/687527846
-    - id: ballad-of-a-homeschooled-girl
-      title: ballad of a homeschooled girl
+        wow another paramore can you tell i like them? but like for real i don't think i've ever heard two voices marry so naturally like OH MY GOD. there should've been more of these two!!!!! the song itself talks about jean paramore trying to help her bandmate taylor york when he's going through a breakup, as she herself went through plenty of them. it's a really endearing song about seeing someone so close to you get hurt so badly :((
+      quote: "For all the joy that is to come,"
+      link: https://music.apple.com/us/song/hate-to-see-your-heart-break-feat-joy-williams/942088625
+    - id: lacy
+      title: lacy
       artist: Olivia Rodrigo
       description: >-
-        unfortunately it kinda describes my social life... OR AT LEAST IT ALMOST DID. i'm glad that i have friends who can power me through that phase, but pleeaseee if you relate to this song talk to your friends <3
-      link: https://music.apple.com/us/song/ballad-of-a-homeschooled-girl/1736995395
-    - id: balalaika
-      title: BALALAIKA
-      artist: 9Lana
+        this one is a genuinely interesting, you can't really tell if it's about love or jealousy. the whole album is actually about jealousy so you can kinda infer from that, but still i actually really relate to this song. she took a poetry class for this song and then just forgot about it i guess???? nothing she made until now is even remotely close to being this expressive
+      quote: "i despise my jealous eyes and how hard they fell for you"
+      link: https://music.apple.com/us/song/lacy/1694386831
+    - id: pushing-daisies-oh-my-my
+      title: Pushing Daisies (Oh My My)
+      artist: Friday Pilots Club
       description: >-
-        i won't pretend like i know what the lyrics means. it sounds good that's all i know. 9Lana is a great singer too :D
-      link: https://music.apple.com/us/song/balalaika/1726896238
+        i can't find the background for this song actually, nobody knows, but it does describe someone basically going insane over seeing their partner get taken by someone else if you try to look into it. honestly though it has a pretty catchy chorus and is just in general pretty singable
+      quote: "For you I'd give the whole damn lot; But tell me what good is all I got?"
+      link: https://music.apple.com/us/song/pushing-daisies-oh-my-my/1697320217
 
   albums:
-    - id: after-laughter
-      title: After Laughter
+    - id: paramore
+      title: Paramore
       artist: Paramore
       description: >-
-        this album kinda signifies how paramore changed from an emo punk band to something a little more pop. they were experimenting with this and it actually worked. it's actually so good to listen to and in general a vibe. even the songs hit too, they mostly talk about dealing with ageing and just depression. phenomenal album by the genuine GOAT.
-      link: https://music.apple.com/us/album/after-laughter/1227049864
+        despite the name this is actually NOT their debut album, this is their like, their third. their last album brand new eyes was filled with internal conflict in the band, so they were meant to be "reborn" in a way here. as for the music i mean i'm obv biased but they cooked or something yea :D
+      link: https://music.apple.com/us/album/paramore-deluxe-edition/942088604
     - id: guts-spilled
       title: GUTS (spilled)
       artist: Olivia Rodrigo
       description: >-
-        mostly talks about how she herself grew up and the difficulties she face. even though i don't really relate too much, but the album itself is an experiment, it's not just 'pure' pop like her previous album, but this one actually have rock elements inside. i really like it, she's leaning to something like Avril Lavigne and she lowkey cooked.
+        mostly talks about how she herself grew up and the difficulties she face. even though i don't really relate too much, but the album itself is an experiment, it's not just 'pure' pop like her previous album, but this one actually have rock elements inside. i really like it, she's leaning to something like avril lavigne and she lowkey cooked.
       link: https://music.apple.com/us/album/guts-spilled/1736994915
-    - id: what-is-love-deluxe
-      title: "What is Love? (Deluxe)"
-      artist: Clean Bandit
+    - id: collide-with-the-sky
+      title: "Collide With The Sky"
+      artist: Pierce The Veil
       description: >-
-        this one is rather old, though still the whole album has nothing but bangers. genuinely fun to listen to. it's like a song you can dance to but the lyrics are somewhat bittersweet and it somehow just works. really love it.
-      link: https://music.apple.com/us/album/what-is-love-deluxe/1436738680
-    - id: from-zero-deluxe
-      title: From Zero (Deluxe Edition)
-      artist: Linkin Park
+        this album is like the most metal i can get before getting scared off, i used to listen to like some weird shit japanese melodic death metal or whatever. i've discovered that i like it when i can understand what they're singing now.  with this album though, apparently they were experimenting and they were just straight up homeless. they're homeless and they're not even taking safe steps i think i like that. if You Know then Yes I Am Trying To Ignore It
+      link: https://music.apple.com/us/album/collide-with-the-sky/1440941951
+    - id: petal
+      title: petal
+      artist: Ariana Grande
       description: >-
-        i can't lie man, it just sounds good and really makes you wanna wake up and do things. i mean linkin park was entirely different before this album, it's almost like they changed everyone to someone else. something something The Ship of Theseus. still really good though.
-      link: https://music.apple.com/us/album/from-zero-deluxe-edition/1801842323
+        this one is a bit weird, she mostly talks about herself and things i can't relate. she's apparently coming to terms with the "consequences" of being rich and famous. i like it though, it's in the same breath as what taylor swift did, just a lot less of a shameless cash grab (sorry not sorry). she basically converted drama into cash and now everything she does is side eyed, she hates that she made YOU love her.
+      link: https://music.apple.com/us/album/petal/1895420989
     - id: short-n-sweet-deluxe
-      title: Short n Sweet (Deluxe)
+      title: Short n Sweet
       artist: Sabrina Carpenter
       description: >-
-        i'm no girl but i think i can appreciate her transformation and honesty. she practically became independent and free herself from her old disney princess shit that didn't really took off, so she instead punches bad exes in the gut and the music industry too while at it. also it's a vibe.
+        this was basically after she's not playing it safe anymore, she's all mature and grow up and talks and sings about whatever the fuck she wants. there's a rebellious story behind the album and i highkey dig it. also yeah it's a vibe.
       link: https://music.apple.com/us/album/short-n-sweet-deluxe/1795512297
-
-  artists:
-    - id: paramore
-      title: Paramore
-      description: >-
-        i love paramore i love paramore i love paramore I LOVEE PARAMOREEEEE!!! their songs are so fun to listen to, it's always upbeat, but there's always some meaning you can extract that's also fun to extract. they have a really wide range from punk, mellow pop, and the latest one is straight up alt pop. i REALLY love them.
-      image: https://www.nme.com/wp-content/uploads/2023/02/NME-PARAMORE-2023-2-credit-Zachary-Gray@2160x2700.jpg
-    - id: ado
-      title: Ado
-      description: >-
-        all she does is sing and she does it really good!!!!! she only recently revealed her face so she was literally faceless for like the entirety of her career. starts from uploading her covering songs and now making her own ones really really quickly. she also has like a huge range, both vocal and discography wise.
-      image: https://cassette.sphdigital.com.sg/image/straitstimes/4713a448fcaa03945d766e0caca97c992ada9ae61b0f616c979926f135b0f6dd?w=900
-    - id: avenged-sevenfold
-      title: Avenged Sevenfold
-      description: >-
-        had a lot of history with them, and putting them anywhere below my 3rd favourite artist would be a major disrespect. i'd be listening to boring whatever's popular pop without them. their songs are just so fun and lifts your own spirit to a mile high.
-      image: https://upload.wikimedia.org/wikipedia/commons/c/ca/Avenged_Sevenfold_2.jpg
-    - id: deco-27
-      title: "DECO *27"
-      description: >-
-        genuinely the greatest vocaloid artists out there. made it big and keeps on delivering. albeit there might be some misses some time, there's still a lot more hits to like. mostly talks about... idk really whatever it is his songs talks about. still like him though.
-      image: https://viberate-upload.ams3.cdn.digitaloceanspaces.com/prod/entity/artist/deco-27-v6dnY
-    - id: polyphia
-      title: Polyphia
-      description: >-
-        them fingers the goat. lowk kinda scary what they can do. no vocals no nothing, just aura or whatever the kids say these days
-      image: https://guitar.com/wp-content/uploads/2022/10/Polyphia-Credit-Press-HERO@2560x1625.jpg
 
 games:
   steamId: "76561199002412925"

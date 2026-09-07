@@ -1,6 +1,5 @@
 const STORE_NAME = "about-sticks-content";
 const METADATA_KEY = "current-song-metadata.json";
-const LYRICS_KEY = "current-song-lyrics.ttml";
 const API_BASE_URL = "https://api.netlify.com";
 
 function requiredEnv(name: string): string {
@@ -51,6 +50,8 @@ const siteId = requiredEnv("NETLIFY_SITE_ID");
 const authToken = requiredEnv("NETLIFY_AUTH_TOKEN");
 const metadataPath = Bun.argv[2] ?? "data/current-song-metadata.json";
 const lyricsPath = Bun.argv[3] ?? "data/current-song-lyrics.ttml";
+const lyricsExtension = lyricsPath.match(/\.(ttml|lrc|txt)$/i)?.[1].toLowerCase() ?? "ttml";
+const lyricsKey = `current-song-lyrics.${lyricsExtension}`;
 
 const metadataContent = await Bun.file(metadataPath).text();
 let metadata: Record<string, unknown>;
@@ -83,9 +84,9 @@ await uploadBlob(
 );
 
 await uploadBlob(
-    `${blobBase}/${encodeURIComponent(LYRICS_KEY)}`,
+    `${blobBase}/${encodeURIComponent(lyricsKey)}`,
     lyricsContent,
-    "application/xml",
+    lyricsExtension === "ttml" ? "application/xml" : "text/plain",
     authToken,
     "lyrics",
 );

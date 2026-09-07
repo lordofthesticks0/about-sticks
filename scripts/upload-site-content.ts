@@ -175,9 +175,8 @@ let parsedContent: SourceContent;
 
 try {
     parsedContent = parse(yamlContent) as SourceContent;
-    if (parsedContent.schemaVersion !== 1) throw new Error("The content file must have schemaVersion: 1");
-    if (!parsedContent.games?.steamId || !Array.isArray(parsedContent.games?.items) || parsedContent.games.items.length === 0) {
-        throw new Error("The content file must include games.steamId and at least one games.items entry");
+    if (!parsedContent || typeof parsedContent !== "object" || !parsedContent.games?.steamId || !Array.isArray(parsedContent.games?.items) || parsedContent.games.items.length === 0) {
+        throw new Error("The content file must include games.steamId and at least one games.items entry for the Steam snapshot");
     }
 } catch (error) {
     throw new Error(`Invalid content YAML: ${error instanceof Error ? error.message : String(error)}`, { cause: error });
