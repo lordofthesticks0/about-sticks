@@ -23,7 +23,11 @@ so there goes, now i have apple music embeds on them. it does slow the page pret
 
 #### UPDATE - SEPTEMBER 2026
 
-i have... matured. netlify blobs were the way, for basically everything. 
+i have... matured. netlify blobs were the way, for basically everything. there was a caching issue that i overlooked because of LLM slop but now it should always fetch fresh data. i also tried kawarp here, it didn't work because mimo 2.5 did NOT read kawarp's documentation. on react and on loading a blob, it should've used a hook. it should work just fine now, but i can't be assed to implement it (which now just means i don't wanna waste tokens on it lol).
+
+i've also added a live lyrics thingy, it actually fetches from my own personal database. i have this script that polls better lyrics whenever i listen to a song, which should cache the lyrics. it's pretty neat. it also fetches from other sources if better lyrics don't have it. LRClib is wide but it's nowhere near as good as unison or better lyrics. there was a minor incident in the XML parser one time (yet again because of LLM slop, this time gpt luna is the perpetrator), and the whole pipeline failed silently. i updated it to parse XML normally instead of what mimo was doing but luna cuts down on the spaces in the spans, which in TTML means thelyricslooklikethis because they are split per word. i had around 865 TTMLs there, and i had to delete 330...... well i mean better here when i'm fucking around than when at a real job i suppose. 
+
+i miss you gemini. i didn't realise you were so fast and was free.... all because google thought it was funny to give the whole wide world free gemini pro for a year. they blew 240 dollars per person in a year, it's crazy how they're not even short on inference right now. the gemini they're running just HAS to be running on their own TPUs instead of some nvidia weird shit.
 
 ## games page 
 next up is the games page. at first it sounded simple, just copy what i already did at the music part, and like, add the games there myself right? no. very very wrong. well i mean, it could be right, but i didn't like that. i could have just embedded the steam store page there, but i wasn't really satisfied with that. i wanted something a little more. so i searched on how i can fetch data from steam and kinda dove into a little rabbit hole.
@@ -54,10 +58,14 @@ so there it is. i **INDEPENDENTLY** thought about this btw. god idk why i'm so g
 
 i plan to incorporate an actual database in the future instead of hardcoding everything into the .jsx file, but for now this will have to do
 
+### UPDATE - September 2026
 
+like i said, netlify blobs should've been the way here. the site is mostly modular now, in fact VERY modular. luna made it way too modular but i can't be assed to burn more tokens for this, got bigger fish on my plate now. i'm reaching the end of my college year and funnily enough i understand way more about C and embedded systems more than i do web dev. thought i was safe from the ai job taking thing but astra just designed a pcb by itself. why can't astra just be fable?? why is it human 2?? just hire humans??? astra cost more than a human at this point. 
+
+looking back though, i don't know why i was so "giddy" about discovering caching. i suppose i've just grown a lot in the past year and know much more about everything. it's not even the caching that i was discovering it was literally just a cdn service. like. that's how. everything works. omg. i've really did grow and change as a person, god damn.
 
 ---
 *See, you're just wasted and thinking bout the past again,*
 *Darling, you'll be okay.*
 
-02/09/2026
+08/09/2026

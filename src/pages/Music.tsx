@@ -87,6 +87,7 @@ function CurrentSong() {
     const lyricsRef = useRef<BraccatoLyricsElement>(null);
     const [braccatoReady, setBraccatoReady] = useState(false);
     const [parsedLyrics, setParsedLyrics] = useState<BraccatoLyric[] | null>(null);
+    const [endedPlaybackKey, setEndedPlaybackKey] = useState<number | null>(null);
     const fallbackCover = (fallbackData.nowPlaying as { artworkUrl?: string }).artworkUrl;
 
     // The upload marks the moment playback conceptually began. Keep this
@@ -100,7 +101,22 @@ function CurrentSong() {
         0,
     ) ?? 0;
     const duration = metadata?.duration ?? (lyricDuration > 0 ? lyricDuration : undefined);
-    const hasEnded = duration !== undefined && playbackOffset >= duration;
+    const hasEnded = endedPlaybackKey === loadedAt
+        || (duration !== undefined && playbackOffset >= duration);
+
+    // playbackOffset is calculated from the upload time, so schedule the
+    // transition to "last listened" when the song actually reaches its end.
+    // Without this timer, playbackOffset only changes when a new payload loads.
+    useEffect(() => {
+        if (duration === undefined || loadedAt === null) return;
+
+        const remainingMs = Math.max(0, (duration - playbackOffset) * 1000);
+        const timeout = window.setTimeout(() => {
+            setEndedPlaybackKey(loadedAt);
+        }, remainingMs);
+
+        return () => window.clearTimeout(timeout);
+    }, [duration, loadedAt, playbackOffset]);
 
     // Give the uploader a short grace period after playback ends, then check
     // whether a new song was published. An unchanged/missing payload remains
@@ -201,8 +217,8 @@ function CurrentSong() {
                         }}
                     />
                     <div className="current-song__titles">
-                        <span className="current-song__title">{metadata.title} <span className="current-song__dot">·</span> {metadata.album}</span>
-                        <span className="current-song__artist">{metadata.artist}</span>
+                        <span className="current-song__title">{metadata.title}</span>
+                        <span className="current-song__artist">{metadata.artist} <span className="current-song__dot">·</span> {metadata.album}</span>
                     </div>
                 </div>
 

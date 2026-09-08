@@ -1,4 +1,9 @@
 .construction-banner {
+    /* Keep the banner above Home's fixed Kawarp background layer. The hover
+       transform creates a stacking context, which otherwise makes the banner
+       appear only after it is hovered in some production browsers. */
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;

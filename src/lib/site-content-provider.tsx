@@ -26,7 +26,13 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         const controller = new AbortController();
 
-        fetch("/.netlify/functions/site-content", { signal: controller.signal })
+        // The content blob can be updated independently of a frontend deploy.
+        // Bypass both the browser cache and any intermediary cache on every app
+        // load so pages never render an older uploaded version.
+        fetch(`/.netlify/functions/site-content?refresh=${Date.now()}`, {
+            signal: controller.signal,
+            cache: "no-store",
+        })
             .then(async (response) => {
                 if (!response.ok) {
                     throw new Error(`Content request failed (${response.status})`);
