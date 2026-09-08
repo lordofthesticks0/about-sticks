@@ -35,7 +35,7 @@ If the content endpoint is unavailable—for example, when running Vite without 
    bun run content:upload -- ./path/to/site-content.yaml
    ```
 
-The uploader first polls the slow Steam data sources (profile, achievements, prices, and equipped profile items), adds the result as the generated `steam` property, and then uses Netlify's raw HTTP Blobs protocol: an authenticated request obtains a signed upload URL, then the JSON is sent to that URL. The protocol uses `PUT` for both requests; no Netlify CLI or Blobs SDK is involved. You normally should not add or edit `steam` in the YAML source. You can inspect or download the live value from the Netlify UI under **Data & Storage → Blobs**. The content reader uses strong-consistency reads and no-store responses so an update is requested from Netlify on each page load.
+The uploader first polls the slow Steam data sources (profile, achievements, prices, and equipped profile items), adds the result as the generated `steam` property, and then uses Netlify's raw HTTP Blobs protocol: an authenticated request obtains a signed upload URL, then the JSON is sent to that URL. The protocol uses `PUT` for both requests; no Netlify CLI or Blobs SDK is involved. You normally should not add or edit `steam` in the YAML source. You can inspect or download the live value from the Netlify UI under **Data & Storage → Blobs**. The content reader uses no-store responses so each page load requests the endpoint again; Netlify Blobs may still take up to its documented propagation window to update all edge locations.
 
 ## Content shape
 

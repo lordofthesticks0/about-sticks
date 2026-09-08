@@ -18,7 +18,7 @@ async function handler(event) {
         // the Blobs context from the Netlify event before opening the store.
         connectLambda(event);
 
-        const store = getStore(STORE_NAME, { consistency: "strong" });
+        const store = getStore(STORE_NAME);
 
         const metadata = await store.get(METADATA_KEY, {
             type: "json",

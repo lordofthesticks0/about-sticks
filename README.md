@@ -44,7 +44,7 @@ so to actually pipe interpret it myself was quite the challenge... if it wasn't 
 i've read that steam only really limits me to 100k requests per day and that's it, but i don't want to take any risks. my `Brainstorming` session had me reinvent caching. i'm quite proud of this actually. unc is still able to think on his own despite vibecoding. 
 my suggestion was to split the function into two. the functions themselves fetch the data and log the current time. the live readers now request fresh data on every page load rather than serving an intentionally stale snapshot.
 
-gemini in its infinite wisdom suggested caching to me. after the euphoria of knowing i independently discovered caching settles down, i stopped and realized that caching would store this in RAM, which doesn't sound likely to something like netlify. the current implementation deliberately avoids that layer for live data: the reader functions are regular functions with no-store headers, and Netlify Blobs reads use strong consistency.
+gemini in its infinite wisdom suggested caching to me. after the euphoria of knowing i independently discovered caching settles down, i stopped and realized that caching would store this in RAM, which doesn't sound likely to something like netlify. the current implementation deliberately avoids HTTP response caching for live data: the reader functions are regular functions with no-store headers. Netlify Blobs can still take its documented propagation window to update every edge location.
 
 so there it is. i **INDEPENDENTLY** thought about this btw. god idk why i'm so giddy about this, i need an ego check some time. 
 

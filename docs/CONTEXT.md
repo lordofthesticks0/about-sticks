@@ -107,7 +107,7 @@ While Tailwind would have been useful, I want to learn about CSS and how to use 
 
 # Netlify Functions
 Located in `netlify/functions/`. The directory is configured in `netlify.toml`.
-- `site-content.cjs` — Reads the JSON site-content blob from Netlify Blobs with a strong-consistency read, no-store response headers, and `GET`-only access.
+- `site-content.cjs` — Reads the JSON site-content blob from Netlify Blobs with no-store response headers and `GET`-only access.
 - `steam-fast.cjs` — Fetches fast-changing playtime and player-count data from Steam. This function is intentionally retained for the fast data path.
 
 The former `steam-heavy` function was removed. Its slow Steam API work now runs once during `scripts/upload-site-content.ts`, before the content blob is uploaded.
