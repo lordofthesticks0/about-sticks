@@ -39,7 +39,7 @@ async function uploadBlob(
         method: "PUT",
         headers: {
             "Content-Type": contentType,
-            "Cache-Control": "max-age=0, stale-while-revalidate=60",
+            "Cache-Control": "no-store",
         },
         body,
     });

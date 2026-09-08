@@ -200,7 +200,7 @@ function CurrentSong() {
 
     return (
         <section className="music-page__section current-song">
-            <h2 className="current-song__header">{hasEnded ? "last listened" : "currently listening"}</h2>
+            <h2 className="current-song__header">{hasEnded ? "last listened" : "now playing"}</h2>
 
             <div className="current-song__card">
                 <div className="current-song__card-info">
@@ -217,7 +217,18 @@ function CurrentSong() {
                         }}
                     />
                     <div className="current-song__titles">
-                        <span className="current-song__title">{metadata.title}</span>
+                        {metadata.id ? (
+                            <a
+                                className="current-song__title"
+                                href={`https://music.youtube.com/watch?v=${encodeURIComponent(metadata.id)}`}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                {metadata.title}
+                            </a>
+                        ) : (
+                            <span className="current-song__title">{metadata.title}</span>
+                        )}
                         <span className="current-song__artist">{metadata.artist} <span className="current-song__dot">·</span> {metadata.album}</span>
                     </div>
                 </div>

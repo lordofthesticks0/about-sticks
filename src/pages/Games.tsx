@@ -170,7 +170,9 @@ function Games() {
         if (!content) return;
 
         const appIdsCsv = content.games.items.map((game) => game.appId).join(",");
-        const fetchFast = fetch(`/.netlify/functions/steam-fast/${content.games.steamId}/${appIdsCsv}`)
+        const fetchFast = fetch(`/.netlify/functions/steam-fast/${content.games.steamId}/${appIdsCsv}?refresh=${Date.now()}`, {
+            cache: "no-store",
+        })
             .then((res) => res.json())
             .then((data: FastData) => setFastData(data))
             .catch(() => null);

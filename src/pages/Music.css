@@ -101,6 +101,11 @@ body:has(.music-page) {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
+  text-decoration: none;
+}
+
+.current-song__title:is(a):hover {
+  text-decoration: underline;
 }
 
 .current-song__dot {

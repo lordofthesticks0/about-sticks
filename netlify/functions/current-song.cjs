@@ -1,4 +1,3 @@
-const { builder } = require("@netlify/functions");
 const { connectLambda, getStore } = require("@netlify/blobs");
 
 const STORE_NAME = "about-sticks-content";
@@ -19,7 +18,7 @@ async function handler(event) {
         // the Blobs context from the Netlify event before opening the store.
         connectLambda(event);
 
-        const store = getStore(STORE_NAME);
+        const store = getStore(STORE_NAME, { consistency: "strong" });
 
         const metadata = await store.get(METADATA_KEY, {
             type: "json",
@@ -28,7 +27,10 @@ async function handler(event) {
         if (metadata === null) {
             return {
                 statusCode: 404,
-                ttl: 60,
+                headers: {
+                    "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+                    "Netlify-CDN-Cache-Control": "no-store",
+                },
                 body: JSON.stringify({ error: `Missing blob: ${METADATA_KEY}` }),
             };
         }
@@ -40,17 +42,20 @@ async function handler(event) {
         if (lyrics === null) {
             return {
                 statusCode: 404,
-                ttl: 60,
+                headers: {
+                    "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+                    "Netlify-CDN-Cache-Control": "no-store",
+                },
                 body: JSON.stringify({ error: `Missing blob: ${LYRICS_KEY}` }),
             };
         }
 
         return {
             statusCode: 200,
-            ttl: 60,
             headers: {
                 "Content-Type": "application/json",
-                "Cache-Control": "public, max-age=0, s-maxage=60, stale-while-revalidate=300",
+                "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+                "Netlify-CDN-Cache-Control": "no-store",
             },
             body: JSON.stringify({ metadata, lyrics }),
         };
@@ -58,10 +63,13 @@ async function handler(event) {
         console.error("Could not read current song blobs", error);
         return {
             statusCode: 500,
-            ttl: 60,
+            headers: {
+                "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+                "Netlify-CDN-Cache-Control": "no-store",
+            },
             body: JSON.stringify({ error: "Could not read current song data" }),
         };
     }
 }
 
-exports.handler = builder(handler);
+exports.handler = handler;

@@ -210,7 +210,7 @@ const uploadResponse = await fetch(signedUrlData.url, {
     method: "PUT",
     headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "max-age=0, stale-while-revalidate=60",
+        "Cache-Control": "no-store",
     },
     body: content,
 });

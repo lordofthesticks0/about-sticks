@@ -3,6 +3,7 @@ import fallbackData from "../../data/light-content-example.json";
 import fallbackLyrics from "../../data/example.ttml?raw";
 
 export interface CurrentSongMetadata {
+    id?: string;
     title: string;
     artist: string;
     album: string;
@@ -30,6 +31,7 @@ interface RawNowPlaying {
 
 function normalizeMetadata(raw: RawNowPlaying): CurrentSongMetadata {
     return {
+        id: raw.id,
         title: raw.title,
         artist: raw.artist,
         album: raw.album,

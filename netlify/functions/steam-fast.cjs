@@ -1,4 +1,3 @@
-const { builder } = require("@netlify/functions");
 /**
  * steam-fast — Fast Data Proxy
  *
@@ -9,7 +8,7 @@ const { builder } = require("@netlify/functions");
  *   /.netlify/functions/steam-fast/:steamid/:appids
  *   where appids is a comma-separated list
  *
- * Cache: 5 minutes (public, s-maxage=300)
+ * The client requests this on page load, so do not serve a cached snapshot.
  */
 
 const API_KEY = process.env.STEAM_API_KEY;
@@ -60,7 +59,8 @@ async function handler(event, context) {
     statusCode: 200,
     headers: {
       "Content-Type": "application/json",
-      "Cache-Control": "public, s-maxage=300",
+      "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+      "Netlify-CDN-Cache-Control": "no-store",
       "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
@@ -70,4 +70,4 @@ async function handler(event, context) {
   };
 }
 
-exports.handler = builder(handler);
+exports.handler = handler;

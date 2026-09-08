@@ -1,4 +1,3 @@
-const { builder } = require("@netlify/functions");
 const { connectLambda, getStore } = require("@netlify/blobs");
 
 const STORE_NAME = "about-sticks-content";
@@ -18,16 +17,16 @@ async function handler(event) {
     // the Blobs context from the Netlify event before opening the store.
     connectLambda(event);
 
-    const content = await getStore(STORE_NAME).get(CONTENT_KEY, {
-      type: "json",
+    const content = await getStore(STORE_NAME, { consistency: "strong" }).get(CONTENT_KEY, {
+        type: "json",
     });
 
     if (content === null) {
       return {
         statusCode: 404,
-        ttl: 0,
         headers: {
-          "Cache-Control": "no-store, no-cache, must-revalidate",
+          "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+          "Netlify-CDN-Cache-Control": "no-store",
         },
         body: JSON.stringify({ error: `Missing blob: ${CONTENT_KEY}` }),
       };
@@ -35,10 +34,10 @@ async function handler(event) {
 
     return {
       statusCode: 200,
-      ttl: 0,
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+        "Netlify-CDN-Cache-Control": "no-store",
       },
       body: JSON.stringify(content),
     };
@@ -46,13 +45,13 @@ async function handler(event) {
     console.error("Could not read site content blob", error);
     return {
       statusCode: 500,
-      ttl: 0,
       headers: {
-        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+        "Netlify-CDN-Cache-Control": "no-store",
       },
       body: JSON.stringify({ error: "Could not read site content" }),
     };
   }
 }
 
-exports.handler = builder(handler);
+exports.handler = handler;

@@ -42,11 +42,9 @@ so to actually pipe interpret it myself was quite the challenge... if it wasn't 
 - some requests can't be batched, namely achievements and prices so it takes a lot of requests
 
 i've read that steam only really limits me to 100k requests per day and that's it, but i don't want to take any risks. my `Brainstorming` session had me reinvent caching. i'm quite proud of this actually. unc is still able to think on his own despite vibecoding. 
-my suggestion was to split the function into two. the functions thmselves fetch the data and logs the current time. if a user reloads the page, which was my consideration, they will be served stale data from 5 minutes to 1 day ago depending on what that data is.
-- play time is timed to 5 minutes
-- profile decor (yes those are actually dynamic on my site and you can request the CDN link directly from their API), achievements, and prices update every 1 day.
+my suggestion was to split the function into two. the functions themselves fetch the data and log the current time. the live readers now request fresh data on every page load rather than serving an intentionally stale snapshot.
 
-gemini in its infinite wisdom suggested caching to me. after the euphoria of knowing i independently discovered caching settles down, i stopped and realized that caching would store this in RAM, which doesn't sound likely to something like netlify. so i looked it up, and there's apparently something called `On-Demand Builders` or whatever the hell. apparently it does exactly what i proposed, set a `time to live` header on their data, and it will serve that data instead. it does count as a CDN, but it's just a couple of JSONs i don't really mind having to serve from my bandwidth for this. 
+gemini in its infinite wisdom suggested caching to me. after the euphoria of knowing i independently discovered caching settles down, i stopped and realized that caching would store this in RAM, which doesn't sound likely to something like netlify. the current implementation deliberately avoids that layer for live data: the reader functions are regular functions with no-store headers, and Netlify Blobs reads use strong consistency.
 
 so there it is. i **INDEPENDENTLY** thought about this btw. god idk why i'm so giddy about this, i need an ego check some time. 
 
